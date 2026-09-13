@@ -1,0 +1,46 @@
+settings:
+  item-mode: auto
+  language: zh_TW
+  shared-radius: 5
+  shared-multiplier: 1.5
+  perfect-multiplier: 1.5
+  level-enabled: true
+  holiday-enabled: true
+  cooking-timeout-seconds: 300
+  perfect-window-seconds: 30
+
+recipes:
+  smoked_steak:
+    name: 煙燻牛排
+    steps: [cut, marinate, cook]
+    ingredients: [BEEF, PEPPER]
+  herb_steak:
+    name: 香草牛排
+    steps: [cut, cook, season]
+    ingredients: [BEEF, SWEET_BERRIES]
+
+seasonings:
+  chili:
+    name: 辣椒
+    material: RED_DYE
+    effects:
+      - type: SPEED
+        duration: 30
+        amplifier: 0
+  honey:
+    name: 蜂蜜
+    material: HONEY_BOTTLE
+    effects:
+      - type: REGENERATION
+        duration: 5
+        amplifier: 0
+
+hidden-recipes:
+  honey_spicy_steak:
+    name: 蜜汁辣牛排
+    base: smoked_steak
+    seasonings: [chili, honey]
+
+database:
+  type: sqlite
+  file: data.db

@@ -1,0 +1,16 @@
+name: CraftKitchen
+version: '26.2.0-SNAPSHOT'
+main: com.example.craftkitchen.CraftKitchen
+api-version: '1.20'
+softdepend:
+  - CraftEngine
+  - PlaceholderAPI
+commands:
+  kitchen:
+    description: CraftKitchen main command
+    usage: /kitchen <subcommand>
+permissions:
+  craftkitchen.use:
+    default: true
+  craftkitchen.admin:
+    default: op
