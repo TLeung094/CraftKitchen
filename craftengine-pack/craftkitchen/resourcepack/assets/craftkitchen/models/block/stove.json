@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "up": "craftkitchen:block/stove_top",
+    "down": "craftkitchen:block/stove_side",
+    "north": "craftkitchen:block/stove_side",
+    "south": "craftkitchen:block/stove_side",
+    "east": "craftkitchen:block/stove_side",
+    "west": "craftkitchen:block/stove_side",
+    "particle": "craftkitchen:block/stove_side"
+  }
+}
