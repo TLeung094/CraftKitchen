@@ -233,7 +233,7 @@ blocks:
     loot: craftkitchen:trash_can
 items:
   craftkitchen:cutting_board:
-    material: wooden_pressure_plate
+    material: oak_pressure_plate
     data:
       item_name: <!i><#8B4513>菜板
       lore:
