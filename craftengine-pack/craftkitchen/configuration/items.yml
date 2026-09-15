@@ -4,30 +4,40 @@ items:
     material: cooked_beef
     model: craftkitchen:item/smoked_steak
     data:
-      item_name: "<!i><color:#8B3A1F>煙燻牛排"
+      item_name: "<!i><color:#8B3A1F><b>煙燻牛排</b>"
       lore:
-        - "<!i><gray>原汁原味，香氣四溢"
+        - "<!i><color:#5C3A1E>森林深處的炭火煙燻"
+        - "<!i><color:#7C4F26>香氣繚繞不散"
 
   craftkitchen:herb_steak:
     material: cooked_beef
     model: craftkitchen:item/herb_steak
     data:
-      item_name: "<!i><color:#5A8F3C>香草牛排"
+      item_name: "<!i><color:#4A7C3A><b>香草牛排</b>"
       lore:
-        - "<!i><gray>清新香草，入口即化"
+        - "<!i><color:#5C7C3E>晨露沾葉的清新香草"
+        - "<!i><color:#7C8C5E>林間清新物語"
 
   craftkitchen:honey_spicy_steak:
     material: cooked_beef
     model: craftkitchen:item/honey_spicy_steak
     data:
-      item_name: "<!i><color:#C8682C>蜜汁辣牛排"
+      item_name: "<!i><color:#C8682C><b>蜜汁辣牛排</b>"
       lore:
-        - "<!i><gray>甜辣交織，隱藏食譜"
+        - "<!i><color:#A8582A>蜂蜜與野辣椒的邂逅"
+        - "<!i><color:#7C3818>森之甜辣物語"
+        - "<!i><color:#9C9C9C>★ 隱藏食譜"
 
   # ---------- 廚房方塊（block_item，放置後變方塊）----------
   craftkitchen:cutting_board:
     material: paper
     model: craftkitchen:item/cutting_board
+    data:
+      item_name: "<!i><color:#5C3A1E><b>森林砧板</b>"
+      lore:
+        - "<!i><color:#7C4F26>森林木匠手作"
+        - "<!i><color:#7C4F26>承載食材的回憶"
+        - "<!i><color:#9C9C9C>放置後觸發切割步驟"
     behavior:
       type: block_item
       block:
@@ -54,6 +64,12 @@ items:
   craftkitchen:stove:
     material: paper
     model: craftkitchen:item/stove
+    data:
+      item_name: "<!i><color:#3A2410><b>森羅爐灶</b>"
+      lore:
+        - "<!i><color:#5C3A1E>石砌老爐，木柴燒出森羅真味"
+        - "<!i><color:#9C9C9C>放置後用打火石點燃"
+        - "<!i><color:#9C9C9C>潛行右鍵觸發烹煮步驟"
     behavior:
       type: block_item
       block:
@@ -80,6 +96,12 @@ items:
   craftkitchen:marinating_stand:
     material: paper
     model: craftkitchen:item/marinating_stand
+    data:
+      item_name: "<!i><color:#4A7C3A><b>森林醃製台</b>"
+      lore:
+        - "<!i><color:#5C7C3E>藤蔓纏繞的森林魔藥架"
+        - "<!i><color:#5C7C3E>浸泡時間的祕方"
+        - "<!i><color:#9C9C9C>放置後觸發醃製步驟"
     behavior:
       type: block_item
       block:
@@ -102,6 +124,12 @@ items:
   craftkitchen:seasoning_table:
     material: paper
     model: craftkitchen:item/seasoning_table
+    data:
+      item_name: "<!i><color:#B07A3F><b>森羅調味桌</b>"
+      lore:
+        - "<!i><color:#7C4F26>四碗香料"
+        - "<!i><color:#7C4F26>訴說四季的森羅物語"
+        - "<!i><color:#9C9C9C>放置後觸發調味步驟"
     behavior:
       type: block_item
       block:

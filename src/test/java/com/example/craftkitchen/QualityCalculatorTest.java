@@ -56,7 +56,7 @@ class QualityCalculatorTest {
             }
         }
         assertTrue(fastHigh > slowHigh,
-            "快速完成應產生更多稀有/傳說：fast=" + fastHigh + " slow=" + slowHigh);
+            "快速完成應產生更多古木/森羅：fast=" + fastHigh + " slow=" + slowHigh);
     }
 
     @Test
@@ -78,6 +78,6 @@ class QualityCalculatorTest {
             }
         }
         assertTrue(highLevelHigh > lowLevelHigh,
-            "高廚師等級應產生更多稀有/傳說：low=" + lowLevelHigh + " high=" + highLevelHigh);
+            "高廚師等級應產生更多古木/森羅：low=" + lowLevelHigh + " high=" + highLevelHigh);
     }
 }
