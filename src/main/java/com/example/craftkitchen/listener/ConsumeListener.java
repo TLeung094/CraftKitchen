@@ -30,12 +30,19 @@ public class ConsumeListener implements Listener {
     @EventHandler
     public void onPlayerItemConsume(PlayerItemConsumeEvent event) {
         Player player = event.getPlayer();
-        FoodData food = plugin.getFoodRegistry().get("smoked_steak");
+        ItemStack item = event.getItem();
+
+        // 動態識別玩家吃的是哪道自訂料理；非本插件物品則不處理
+        String foodId = plugin.getItemProvider().getItemId(item);
+        if (foodId == null) {
+            return;
+        }
+        FoodData food = plugin.getFoodRegistry().get(foodId);
         if (food == null) {
             return;
         }
 
-        CookingQuality quality = readQuality(event.getItem());
+        CookingQuality quality = readQuality(item);
         double multiplier = plugin.getConfig().getDouble("settings.perfect-multiplier", 1.5);
         boolean sharing = plugin.getSharedMealManager().hasNearbyPlayers(player);
 
@@ -49,7 +56,7 @@ public class ConsumeListener implements Listener {
         }
 
         if (sharing) {
-            player.sendMessage("你與附近的玩家一起享用了美食，效果時間延長！");
+            player.sendMessage("你與附近的玩家一起享用了" + food.getName() + "，效果時間延長！");
         }
     }
 
