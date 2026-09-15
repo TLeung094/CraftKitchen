@@ -1,78 +1,68 @@
 package com.example.craftkitchen.item;
 
-import com.example.craftkitchen.CraftKitchen;
-import com.example.craftkitchen.food.FoodData;
-import com.example.craftkitchen.food.FoodRegistry;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextDecoration;
+import net.momirealms.craftengine.bukkit.api.CraftEngineItems;
+import net.momirealms.craftengine.bukkit.item.BukkitItemDefinition;
+import net.momirealms.craftengine.core.util.Key;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 
 /**
- * CraftEngine 模式物品提供者。
+ * CraftEngine 模式物品提供者：以 CraftEngine 自訂物品（{@code craftkitchen:<id>}) 建立與識別。
  *
- * <p>完整實作應透過 CraftEngineAPI 取得自訂物品與模型，但本專案目前未將 CraftEngine 列為
- * 編譯依賴，故此處先以原版行為 fallback：同樣查 FoodRegistry、標記 PDC(food_id)，
- * 確保 CraftEngine 模式下核心玩法鏈路仍可運作。待正式整合 CraftEngine 時僅需改寫此類。
+ * <p>透過 CraftEngine 穩定 API（{@link CraftEngineItems}）運作：
+ * <ul>
+ *   <li>{@code createItem} → 查 {@link CraftEngineItems#byId} 後呼叫 {@link BukkitItemDefinition#buildBukkitItem()}</li>
+ *   <li>{@code getItemId} → {@link CraftEngineItems#getCustomItemId}，限 {@code craftkitchen} namespace</li>
+ *   <li>{@code isCustomItem} → 同上 namespace gate</li>
+ * </ul>
+ *
+ * <p>CE 自訂物品與方塊定義於 {@code craftengine-pack/craftkitchen/configuration/}，
+ * 部署時複製到 {@code plugins/CraftEngine/resources/} 並執行 {@code /ce reload all}。
  */
 public class CraftEngineItemProvider implements ItemProvider {
-    private final CraftKitchen plugin;
-    private final NamespacedKey foodIdKey;
 
-    public CraftEngineItemProvider(CraftKitchen plugin) {
-        this.plugin = plugin;
-        this.foodIdKey = new NamespacedKey(plugin, "food_id");
-    }
+    private static final String NAMESPACE = "craftkitchen";
 
     @Override
     public ItemStack createItem(String id, int amount) {
-        FoodRegistry registry = plugin.getFoodRegistry();
-        FoodData data = registry != null ? registry.get(id) : null;
-
-        Material material = Material.BREAD;
-        int customModelData = 0;
-        String displayName = "CraftKitchen: " + id;
-        if (data != null) {
-            Material parsed = Material.matchMaterial(data.getMaterial());
-            if (parsed != null) {
-                material = parsed;
-            }
-            customModelData = data.getCustomModelData();
-            displayName = data.getName();
+        BukkitItemDefinition def = CraftEngineItems.byId(NAMESPACE + ":" + id);
+        if (def == null) {
+            // CE 物品尚未載入或 id 不存在；給予紙張避免 null，並由上層決策是否提示玩家
+            return new ItemStack(Material.PAPER, Math.max(1, amount));
         }
-
-        ItemStack item = new ItemStack(material, Math.max(1, amount));
-        ItemMeta meta = item.getItemMeta();
-        if (meta != null) {
-            meta.displayName(Component.text(displayName).decoration(TextDecoration.ITALIC, false));
-            if (customModelData > 0) {
-                meta.setCustomModelData(customModelData);
-            }
-            meta.getPersistentDataContainer().set(foodIdKey, PersistentDataType.STRING, id);
-            item.setItemMeta(meta);
-        }
+        ItemStack item = def.buildBukkitItem();
+        item.setAmount(Math.max(1, amount));
         return item;
     }
 
     @Override
     public String getItemId(ItemStack item) {
-        if (item == null || item.getType() == Material.AIR || !item.hasItemMeta()) {
+        Key customId = safeCustomId(item);
+        if (customId == null) {
             return null;
         }
-        return item.getItemMeta().getPersistentDataContainer()
-            .get(foodIdKey, PersistentDataType.STRING);
+        if (!NAMESPACE.equals(customId.namespace())) {
+            return null;
+        }
+        return customId.value();
     }
 
     @Override
     public boolean isCustomItem(ItemStack item) {
-        return getItemId(item) != null;
+        Key customId = safeCustomId(item);
+        return customId != null && NAMESPACE.equals(customId.namespace());
     }
 
     @Override
     public void registerRecipes() {
-        // 待整合 CraftEngine 後改寫
+        // CE 配方在 craftengine-pack/craftkitchen/configuration/ YAML 中定義，
+        // 由 CraftEngine 自行載入，無需 Java 端註冊。
+    }
+
+    private static Key safeCustomId(ItemStack item) {
+        if (item == null || item.getType() == Material.AIR) {
+            return null;
+        }
+        return CraftEngineItems.getCustomItemId(item);
     }
 }

@@ -34,9 +34,11 @@ public interface ItemProvider {
 ```
 
 - `VanillaItemProvider`：以 `Material` + `CustomModelData` + 顯示名稱產生物品，並用 PDC（`food_id`）標記，使 `getItemId` 可反查。
-- `CraftEngineItemProvider`：委派 CraftEngine API 產生物品（需安裝 CE；未安裝時降為原版行為）。
+- `CraftEngineItemProvider`：透過 CraftEngine 穩定 API（`CraftEngineItems`）運作——`byId` 查 `craftkitchen:<id>` 後 `buildBukkitItem()` 產物、`getCustomItemId` 反查（限 `craftkitchen` namespace）。CE 物品與方塊定義於 `craftengine-pack/craftkitchen/`，部署至 `plugins/CraftEngine/resources/` 後由 CE 載入。
 
 由 `ItemProviderFactory.create(itemMode, plugin)` 依模式產生實例。核心系統只透過 `ItemProvider` 存取物品，不依賴具體模式。
+
+> **CE 模式現為真實作**（非 stub）：`CraftEngineItemProvider` 直接呼叫 CE API，不再 fallback 為原版行為。物品與方塊的材質、模型、名稱、lore 全由 `craftengine-pack/` 的 YAML + PNG 定義，CE 自動打包成資源包發給玩家。部署方式見 [`craftengine-pack/README.md`](../craftengine-pack/README.md)。
 
 ## 選擇建議
 

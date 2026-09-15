@@ -31,13 +31,14 @@
 | 品質影響食物效果（每級倍率 0.5x ~ 2.0x） | ✅ |
 | 動態 Lore（品質分級 + 效果摘要） | ✅ |
 | 爐灶點燃／澆滅（cook 步驟需已點燃） | ✅ |
-| CraftEngine 實際物品生成 | ⬜ stub（fallback 為原版行為） |
+| CraftEngine 實際物品生成（API 整合 + content pack） | ✅ |
 | 共食系統 | ✅ |
 | 料理等級 | ✅ |
 | 節日限定 | ✅ |
 | 調味與隱藏食譜 | ✅ |
 | docs/ 文件（INSTALL/MODES/CONFIG/RECIPES/BLOCKS/API） | ✅ |
-| resourcepack/ 骨架（pack.mcmeta + 模型 + 佔位貼圖） | ✅ |
+| resourcepack/ 骨架（原版模式 pack.mcmeta + 模型 + 佔位貼圖） | ✅ |
+| craftengine-pack/（CE 模式 content pack：3 料理 + 4 廚房方塊 + 32×32 貼圖） | ✅ |
 
 ---
 

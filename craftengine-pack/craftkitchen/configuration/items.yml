@@ -1,0 +1,129 @@
+items:
+  # ---------- 料理食物（純食物物品）----------
+  craftkitchen:smoked_steak:
+    material: cooked_beef
+    model: craftkitchen:item/smoked_steak
+    data:
+      item_name: "<!i><color:#8B3A1F>煙燻牛排"
+      lore:
+        - "<!i><gray>原汁原味，香氣四溢"
+
+  craftkitchen:herb_steak:
+    material: cooked_beef
+    model: craftkitchen:item/herb_steak
+    data:
+      item_name: "<!i><color:#5A8F3C>香草牛排"
+      lore:
+        - "<!i><gray>清新香草，入口即化"
+
+  craftkitchen:honey_spicy_steak:
+    material: cooked_beef
+    model: craftkitchen:item/honey_spicy_steak
+    data:
+      item_name: "<!i><color:#C8682C>蜜汁辣牛排"
+      lore:
+        - "<!i><gray>甜辣交織，隱藏食譜"
+
+  # ---------- 廚房方塊（block_item，放置後變方塊）----------
+  craftkitchen:cutting_board:
+    material: paper
+    model: craftkitchen:item/cutting_board
+    behavior:
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            path: craftkitchen:block/cutting_board
+            textures:
+              - craftkitchen:block/cutting_board_top
+              - craftkitchen:block/cutting_board_side
+        settings:
+          hardness: 2.0
+          sounds:
+            break: minecraft:block.wood.break
+            step: minecraft:block.wood.step
+            place: minecraft:block.wood.place
+            hit: minecraft:block.wood.hit
+            fall: minecraft:block.wood.fall
+          tags:
+            - minecraft:mineable/axe
+        loot:
+          template: default:loot_table/self
+
+  craftkitchen:stove:
+    material: paper
+    model: craftkitchen:item/stove
+    behavior:
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            path: craftkitchen:block/stove
+            textures:
+              - craftkitchen:block/stove_top
+              - craftkitchen:block/stove_side
+        settings:
+          hardness: 5.0
+          sounds:
+            break: minecraft:block.stone.break
+            step: minecraft:block.stone.step
+            place: minecraft:block.stone.place
+            hit: minecraft:block.stone.hit
+            fall: minecraft:block.stone.fall
+          tags:
+            - minecraft:mineable/pickaxe
+        loot:
+          template: default:loot_table/self
+
+  craftkitchen:marinating_stand:
+    material: paper
+    model: craftkitchen:item/marinating_stand
+    behavior:
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          texture: craftkitchen:block/marinating_stand
+        settings:
+          hardness: 2.0
+          sounds:
+            break: minecraft:block.wood.break
+            step: minecraft:block.wood.step
+            place: minecraft:block.wood.place
+            hit: minecraft:block.wood.hit
+            fall: minecraft:block.wood.fall
+          tags:
+            - minecraft:mineable/axe
+        loot:
+          template: default:loot_table/self
+
+  craftkitchen:seasoning_table:
+    material: paper
+    model: craftkitchen:item/seasoning_table
+    behavior:
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            path: craftkitchen:block/seasoning_table
+            textures:
+              - craftkitchen:block/seasoning_table_top
+              - craftkitchen:block/seasoning_table_side
+        settings:
+          hardness: 2.5
+          sounds:
+            break: minecraft:block.wood.break
+            step: minecraft:block.wood.step
+            place: minecraft:block.wood.place
+            hit: minecraft:block.wood.hit
+            fall: minecraft:block.wood.fall
+          tags:
+            - minecraft:mineable/axe
+        loot:
+          template: default:loot_table/self
+
+# 確保 `model:` 引用 reference 指向 resources/assets/craftkitchen/models/
+# 對應模型 JSON 請見 resourcepack/assets/craftkitchen/models/
