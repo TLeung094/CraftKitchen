@@ -413,7 +413,7 @@ items:
       type: block_item
       block: craftkitchen:trash_can
   craftkitchen:braised_beef:
-    material: cooked_beef
+    material: paper
     data:
       item_name: <!i><#FF4500>紅燒牛肉
       lore:
@@ -425,10 +425,12 @@ items:
     food-properties:
       nutrition: 12
       saturation: 18
-    texture: craftkitchen:item/braised_beef
-    custom_model_data: 1001
+    behavior:
+      type: consumable
+      model:
+        path: craftkitchen:item/braised_beef
   craftkitchen:knight_steak:
-    material: cooked_beef
+    material: paper
     data:
       item_name: <!i><#FFD700>香煎騎士牛排
       lore:
@@ -441,10 +443,12 @@ items:
     food-properties:
       nutrition: 14
       saturation: 20
-    texture: craftkitchen:item/knight_steak
-    custom_model_data: 1002
+    behavior:
+      type: consumable
+      model:
+        path: craftkitchen:item/knight_steak
   craftkitchen:egg_fried_rice:
-    material: cooked_beef
+    material: paper
     data:
       item_name: <!i><#FFFF00>蛋炒飯
       lore:
@@ -456,5 +460,7 @@ items:
     food-properties:
       nutrition: 8
       saturation: 12
-    texture: craftkitchen:item/egg_fried_rice
-    custom_model_data: 1003
+    behavior:
+      type: consumable
+      model:
+        path: craftkitchen:item/egg_fried_rice
