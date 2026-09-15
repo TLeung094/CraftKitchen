@@ -1,6 +1,6 @@
 # ========================================
 # CraftKitchen items.yml — 森罗物语：厨房
-# Fixed: behavior.type = block_item (CraftEngine schema)
+# Fixed: behavior.type = block_item, loot = single string
 # ========================================
 
 items:
@@ -63,8 +63,7 @@ items:
             step: minecraft:block.wood.step
             place: minecraft:block.wood.place
             hit: minecraft:block.wood.hit
-        loot:
-        - craftkitchen:cutting_board
+        loot: craftkitchen:cutting_board
   stove:
     material: note_block
     custom-model-data: 2002
@@ -88,8 +87,7 @@ items:
             step: minecraft:block.stone.step
             place: minecraft:block.stone.place
             hit: minecraft:block.stone.hit
-        loot:
-        - craftkitchen:stove
+        loot: craftkitchen:stove
   enamel_basin:
     material: note_block
     custom-model-data: 2003
@@ -112,8 +110,7 @@ items:
             step: minecraft:block.metal.step
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
-        loot:
-        - craftkitchen:enamel_basin
+        loot: craftkitchen:enamel_basin
   utensil_rack:
     material: note_block
     custom-model-data: 2004
@@ -136,8 +133,7 @@ items:
             step: minecraft:block.wood.step
             place: minecraft:block.wood.place
             hit: minecraft:block.wood.hit
-        loot:
-        - craftkitchen:utensil_rack
+        loot: craftkitchen:utensil_rack
   wok:
     material: note_block
     custom-model-data: 2010
@@ -159,8 +155,7 @@ items:
             step: minecraft:block.metal.step
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
-        loot:
-        - craftkitchen:wok
+        loot: craftkitchen:wok
   soup_pot:
     material: note_block
     custom-model-data: 2011
@@ -182,8 +177,7 @@ items:
             step: minecraft:block.metal.step
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
-        loot:
-        - craftkitchen:soup_pot
+        loot: craftkitchen:soup_pot
   steamer:
     material: note_block
     custom-model-data: 2012
@@ -205,8 +199,7 @@ items:
             step: minecraft:block.bamboo_wood.step
             place: minecraft:block.bamboo_wood.place
             hit: minecraft:block.bamboo_wood.hit
-        loot:
-        - craftkitchen:steamer
+        loot: craftkitchen:steamer
   stone_mill:
     material: note_block
     custom-model-data: 2013
@@ -228,8 +221,7 @@ items:
             step: minecraft:block.stone.step
             place: minecraft:block.stone.place
             hit: minecraft:block.stone.hit
-        loot:
-        - craftkitchen:stone_mill
+        loot: craftkitchen:stone_mill
   oil_pot:
     material: note_block
     custom-model-data: 2014
@@ -251,8 +243,7 @@ items:
             step: minecraft:block.metal.step
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
-        loot:
-        - craftkitchen:oil_pot
+        loot: craftkitchen:oil_pot
   teapot:
     material: note_block
     custom-model-data: 2015
@@ -274,8 +265,7 @@ items:
             step: minecraft:block.metal.step
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
-        loot:
-        - craftkitchen:teapot
+        loot: craftkitchen:teapot
   fruit_basket:
     material: note_block
     custom-model-data: 2016
@@ -297,8 +287,7 @@ items:
             step: minecraft:block.bamboo_wood.step
             place: minecraft:block.bamboo_wood.place
             hit: minecraft:block.bamboo_wood.hit
-        loot:
-        - craftkitchen:fruit_basket
+        loot: craftkitchen:fruit_basket
   recipe_book:
     material: note_block
     custom-model-data: 2017
@@ -320,8 +309,7 @@ items:
             step: minecraft:block.grass.step
             place: minecraft:block.grass.place
             hit: minecraft:block.grass.hit
-        loot:
-        - craftkitchen:recipe_book
+        loot: craftkitchen:recipe_book
   cyclone_grill:
     material: note_block
     custom-model-data: 2018
@@ -343,8 +331,7 @@ items:
             step: minecraft:block.metal.step
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
-        loot:
-        - craftkitchen:cyclone_grill
+        loot: craftkitchen:cyclone_grill
   scarecrow:
     material: note_block
     custom-model-data: 2019
@@ -366,8 +353,7 @@ items:
             step: minecraft:block.grass.step
             place: minecraft:block.grass.place
             hit: minecraft:block.grass.hit
-        loot:
-        - craftkitchen:scarecrow
+        loot: craftkitchen:scarecrow
   trash_can:
     material: note_block
     custom-model-data: 2020
@@ -389,5 +375,4 @@ items:
             step: minecraft:block.metal.step
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
-        loot:
-        - craftkitchen:trash_can
+        loot: craftkitchen:trash_can

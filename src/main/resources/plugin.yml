@@ -1,5 +1,5 @@
 name: CraftKitchen
-version: '26.5.1'
+version: '26.5.2'
 main: com.example.craftkitchen.CraftKitchen
 api-version: '1.20'
 softdepend:
