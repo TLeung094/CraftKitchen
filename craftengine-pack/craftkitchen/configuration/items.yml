@@ -1,340 +1,382 @@
+# ========================================
+# CraftKitchen items.yml — 森罗物语：厨房
+# Fixed: behavior.type = block_item, loot = single string
+# Fixed: food items need texture field for custom model
+# ========================================
+
 items:
-  # ========================================
-  # 料理成品（3 種）
-  # 來源：森罗物语：厨房 (Kaleidoscope Cookery) 模組
-  # ========================================
   braised_beef:
     material: cooked_beef
-    custom-model-data: 1001
-    name: "&c&l红烧牛肉"
+    name: '&c&l红烧牛肉'
     lore:
-      - "&7&o浓油赤酱，色泽红亮"
-      - "&7&o慢火细炖，肉质酥烂"
-      - ""
-      - "&e品质：&f{quality}"
+    - '&7&o浓油赤酱，色泽红亮'
+    - '&7&o慢火细炖，肉质酥烂'
+    - ''
+    - '&e品质：&f{quality}'
     food-properties:
       nutrition: 12
       saturation: 18
-
+    texture: craftkitchen:item/braised_beef
+    custom_model_data: 1001
   knight_steak:
     material: cooked_beef
-    custom-model-data: 1002
-    name: "&6&l香煎骑士牛排"
+    name: '&6&l香煎骑士牛排'
     lore:
-      - "&7&o铁板高温锁住肉汁"
-      - "&7&o外焦里嫩，骑士的最爱"
-      - ""
-      - "&e品质：&f{quality}"
-      - "&c稀有配方 ★"
+    - '&7&o铁板高温锁住肉汁'
+    - '&7&o外焦里嫩，骑士的最爱'
+    - ''
+    - '&e品质：&f{quality}'
+    - '&c稀有配方 ★'
     food-properties:
       nutrition: 14
       saturation: 20
-
+    texture: craftkitchen:item/knight_steak
+    custom_model_data: 1002
   egg_fried_rice:
     material: cooked_beef
-    custom-model-data: 1003
-    name: "&e&l蛋炒饭"
+    name: '&e&l蛋炒饭'
     lore:
-      - "&7&o金黄蛋碎裹粒粒分明"
-      - "&7&o葱香四溢，家常之味"
-      - ""
-      - "&e品质：&f{quality}"
+    - '&7&o金黄蛋碎裹粒粒分明'
+    - '&7&o葱香四溢，家常之味'
+    - ''
+    - '&e品质：&f{quality}'
     food-properties:
       nutrition: 8
       saturation: 12
-
-  # ========================================
-  # 厨房功能方块（4 主烹饪步骤）
-  # ========================================
+    texture: craftkitchen:item/egg_fried_rice
+    custom_model_data: 1003
   cutting_board:
     material: note_block
-    custom-model-data: 2001
-    name: "&e&l菜板"
+    name: '&e&l菜板'
     lore:
-      - "&7木纹年轮，切配食材之处"
-      - "&7&o用于：&f伐枝（切）"
+    - '&7木纹年轮，切配食材之处'
+    - '&7&o用于：&f伐枝（切）'
     behavior:
-      block-item:
-        model: craftkitchen:block/cutting_board
-        hardness: 2.0
-        resistance: 6.0
-        sounds:
-          break: wood
-          step: wood
-          place: wood
-          hit: wood
-        loot:
-          - craftkitchen:cutting_board
-
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/cutting_board
+        settings:
+          hardness: 2.0
+          resistance: 6.0
+          sounds:
+            break: minecraft:block.wood.break
+            step: minecraft:block.wood.step
+            place: minecraft:block.wood.place
+            hit: minecraft:block.wood.hit
+        loot: craftkitchen:cutting_board
+    custom_model_data: 2001
   stove:
     material: note_block
-    custom-model-data: 2002
-    name: "&c&l炉灶"
+    name: '&c&l炉灶'
     lore:
-      - "&7石砌古朴，火盘炙热"
-      - "&7&o用于：&f烧柴（煮）"
-      - "&7&o状态：&f{firing}"
+    - '&7石砌古朴，火盘炙热'
+    - '&7&o用于：&f烧柴（煮）'
+    - '&7&o状态：&f{firing}'
     behavior:
-      block-item:
-        model: craftkitchen:block/stove
-        hardness: 5.0
-        resistance: 10.0
-        sounds:
-          break: stone
-          step: stone
-          place: stone
-          hit: stone
-        loot:
-          - craftkitchen:stove
-
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/stove
+        settings:
+          hardness: 5.0
+          resistance: 10.0
+          sounds:
+            break: minecraft:block.stone.break
+            step: minecraft:block.stone.step
+            place: minecraft:block.stone.place
+            hit: minecraft:block.stone.hit
+        loot: craftkitchen:stove
+    custom_model_data: 2002
   enamel_basin:
     material: note_block
-    custom-model-data: 2003
-    name: "&f&l搪瓷盆子"
+    name: '&f&l搪瓷盆子'
     lore:
-      - "&7白釉搪瓷，浸露调浆"
-      - "&7&o用于：&f浸露（醃）"
+    - '&7白釉搪瓷，浸露调浆'
+    - '&7&o用于：&f浸露（醃）'
     behavior:
-      block-item:
-        model: craftkitchen:block/enamel_basin
-        hardness: 1.0
-        resistance: 3.0
-        sounds:
-          break: glass
-          step: metal
-          place: metal
-          hit: metal
-        loot:
-          - craftkitchen:enamel_basin
-
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/enamel_basin
+        settings:
+          hardness: 1.0
+          resistance: 3.0
+          sounds:
+            break: minecraft:block.glass.break
+            step: minecraft:block.metal.step
+            place: minecraft:block.metal.place
+            hit: minecraft:block.metal.hit
+        loot: craftkitchen:enamel_basin
+    custom_model_data: 2003
   utensil_rack:
     material: note_block
-    custom-model-data: 2004
-    name: "&6&l厨具架"
+    name: '&6&l厨具架'
     lore:
-      - "&7置锅碗瓢盆，调味之所"
-      - "&7&o用于：&f点芳（调）"
+    - '&7置锅碗瓢盆，调味之所'
+    - '&7&o用于：&f点芳（调）'
     behavior:
-      block-item:
-        model: craftkitchen:block/utensil_rack
-        hardness: 2.0
-        resistance: 6.0
-        sounds:
-          break: wood
-          step: wood
-          place: wood
-          hit: wood
-        loot:
-          - craftkitchen:utensil_rack
-
-  # ========================================
-  # 厨房装饰/附加方块
-  # ========================================
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/utensil_rack
+        settings:
+          hardness: 2.0
+          resistance: 6.0
+          sounds:
+            break: minecraft:block.wood.break
+            step: minecraft:block.wood.step
+            place: minecraft:block.wood.place
+            hit: minecraft:block.wood.hit
+        loot: craftkitchen:utensil_rack
+    custom_model_data: 2004
   wok:
     material: note_block
-    custom-model-data: 2010
-    name: "&c&l炒锅"
+    name: '&c&l炒锅'
     lore:
-      - "&7&o猛火爆炒，香气四溢"
+    - '&7&o猛火爆炒，香气四溢'
     behavior:
-      block-item:
-        model: craftkitchen:block/wok
-        hardness: 3.0
-        resistance: 6.0
-        sounds:
-          break: metal
-          step: metal
-          place: metal
-          hit: metal
-        loot:
-          - craftkitchen:wok
-
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/wok
+        settings:
+          hardness: 3.0
+          resistance: 6.0
+          sounds:
+            break: minecraft:block.metal.break
+            step: minecraft:block.metal.step
+            place: minecraft:block.metal.place
+            hit: minecraft:block.metal.hit
+        loot: craftkitchen:wok
+    custom_model_data: 2010
   soup_pot:
     material: note_block
-    custom-model-data: 2011
-    name: "&6&l汤锅"
+    name: '&6&l汤锅'
     lore:
-      - "&7&o慢火细炖，浓汤之源"
+    - '&7&o慢火细炖，浓汤之源'
     behavior:
-      block-item:
-        model: craftkitchen:block/soup_pot
-        hardness: 3.0
-        resistance: 6.0
-        sounds:
-          break: metal
-          step: metal
-          place: metal
-          hit: metal
-        loot:
-          - craftkitchen:soup_pot
-
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/soup_pot
+        settings:
+          hardness: 3.0
+          resistance: 6.0
+          sounds:
+            break: minecraft:block.metal.break
+            step: minecraft:block.metal.step
+            place: minecraft:block.metal.place
+            hit: minecraft:block.metal.hit
+        loot: craftkitchen:soup_pot
+    custom_model_data: 2011
   steamer:
     material: note_block
-    custom-model-data: 2012
-    name: "&e&l蒸笼"
+    name: '&e&l蒸笼'
     lore:
-      - "&7&o竹蒸笼，蒸汽升腾"
+    - '&7&o竹蒸笼，蒸汽升腾'
     behavior:
-      block-item:
-        model: craftkitchen:block/steamer
-        hardness: 2.0
-        resistance: 4.0
-        sounds:
-          break: bamboo
-          step: bamboo
-          place: bamboo
-          hit: bamboo
-        loot:
-          - craftkitchen:steamer
-
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/steamer
+        settings:
+          hardness: 2.0
+          resistance: 4.0
+          sounds:
+            break: minecraft:block.bamboo_wood.break
+            step: minecraft:block.bamboo_wood.step
+            place: minecraft:block.bamboo_wood.place
+            hit: minecraft:block.bamboo_wood.hit
+        loot: craftkitchen:steamer
+    custom_model_data: 2012
   stone_mill:
     material: note_block
-    custom-model-data: 2013
-    name: "&7&l石磨"
+    name: '&7&l石磨'
     lore:
-      - "&7&o石磨成粉，研磨香料"
+    - '&7&o石磨成粉，研磨香料'
     behavior:
-      block-item:
-        model: craftkitchen:block/stone_mill
-        hardness: 6.0
-        resistance: 12.0
-        sounds:
-          break: stone
-          step: stone
-          place: stone
-          hit: stone
-        loot:
-          - craftkitchen:stone_mill
-
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/stone_mill
+        settings:
+          hardness: 6.0
+          resistance: 12.0
+          sounds:
+            break: minecraft:block.stone.break
+            step: minecraft:block.stone.step
+            place: minecraft:block.stone.place
+            hit: minecraft:block.stone.hit
+        loot: craftkitchen:stone_mill
+    custom_model_data: 2013
   oil_pot:
     material: note_block
-    custom-model-data: 2014
-    name: "&e&l油壶"
+    name: '&e&l油壶'
     lore:
-      - "&7&o油光鉴人，调味之需"
+    - '&7&o油光鉴人，调味之需'
     behavior:
-      block-item:
-        model: craftkitchen:block/oil_pot
-        hardness: 1.0
-        resistance: 3.0
-        sounds:
-          break: glass
-          step: metal
-          place: metal
-          hit: metal
-        loot:
-          - craftkitchen:oil_pot
-
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/oil_pot
+        settings:
+          hardness: 1.0
+          resistance: 3.0
+          sounds:
+            break: minecraft:block.glass.break
+            step: minecraft:block.metal.step
+            place: minecraft:block.metal.place
+            hit: minecraft:block.metal.hit
+        loot: craftkitchen:oil_pot
+    custom_model_data: 2014
   teapot:
     material: note_block
-    custom-model-data: 2015
-    name: "&a&l茶壶"
+    name: '&a&l茶壶'
     lore:
-      - "&7&o煮茶论道，悠然自在"
+    - '&7&o煮茶论道，悠然自在'
     behavior:
-      block-item:
-        model: craftkitchen:block/teapot
-        hardness: 2.0
-        resistance: 4.0
-        sounds:
-          break: metal
-          step: metal
-          place: metal
-          hit: metal
-        loot:
-          - craftkitchen:teapot
-
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/teapot
+        settings:
+          hardness: 2.0
+          resistance: 4.0
+          sounds:
+            break: minecraft:block.metal.break
+            step: minecraft:block.metal.step
+            place: minecraft:block.metal.place
+            hit: minecraft:block.metal.hit
+        loot: craftkitchen:teapot
+    custom_model_data: 2015
   fruit_basket:
     material: note_block
-    custom-model-data: 2016
-    name: "&6&l果篮"
+    name: '&6&l果篮'
     lore:
-      - "&7&o满载山林鲜果"
+    - '&7&o满载山林鲜果'
     behavior:
-      block-item:
-        model: craftkitchen:block/fruit_basket
-        hardness: 1.0
-        resistance: 2.0
-        sounds:
-          break: bamboo_wood
-          step: bamboo_wood
-          place: bamboo_wood
-          hit: bamboo_wood
-        loot:
-          - craftkitchen:fruit_basket
-
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/fruit_basket
+        settings:
+          hardness: 1.0
+          resistance: 2.0
+          sounds:
+            break: minecraft:block.bamboo_wood.break
+            step: minecraft:block.bamboo_wood.step
+            place: minecraft:block.bamboo_wood.place
+            hit: minecraft:block.bamboo_wood.hit
+        loot: craftkitchen:fruit_basket
+    custom_model_data: 2016
   recipe_book:
     material: note_block
-    custom-model-data: 2017
-    name: "&e&l菜谱"
+    name: '&e&l菜谱'
     lore:
-      - "&7&o古朴菜谱，记录森罗之味"
+    - '&7&o古朴菜谱，记录森罗之味'
     behavior:
-      block-item:
-        model: craftkitchen:block/recipe_book
-        hardness: 1.0
-        resistance: 2.0
-        sounds:
-          break: grass
-          step: grass
-          place: grass
-          hit: grass
-        loot:
-          - craftkitchen:recipe_book
-
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/recipe_book
+        settings:
+          hardness: 1.0
+          resistance: 2.0
+          sounds:
+            break: minecraft:block.grass.break
+            step: minecraft:block.grass.step
+            place: minecraft:block.grass.place
+            hit: minecraft:block.grass.hit
+        loot: craftkitchen:recipe_book
+    custom_model_data: 2017
   cyclone_grill:
     material: note_block
-    custom-model-data: 2018
-    name: "&c&l旋风烤肉塔"
+    name: '&c&l旋风烤肉塔'
     lore:
-      - "&7&o立体旋转烤架，炙烤每一面"
+    - '&7&o立体旋转烤架，炙烤每一面'
     behavior:
-      block-item:
-        model: craftkitchen:block/cyclone_grill
-        hardness: 4.0
-        resistance: 8.0
-        sounds:
-          break: metal
-          step: metal
-          place: metal
-          hit: metal
-        loot:
-          - craftkitchen:cyclone_grill
-
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/cyclone_grill
+        settings:
+          hardness: 4.0
+          resistance: 8.0
+          sounds:
+            break: minecraft:block.metal.break
+            step: minecraft:block.metal.step
+            place: minecraft:block.metal.place
+            hit: minecraft:block.metal.hit
+        loot: craftkitchen:cyclone_grill
+    custom_model_data: 2018
   scarecrow:
     material: note_block
-    custom-model-data: 2019
-    name: "&e&l稻草人"
+    name: '&e&l稻草人'
     lore:
-      - "&7&o田园守望，稻草编织"
+    - '&7&o田园守望，稻草编织'
     behavior:
-      block-item:
-        model: craftkitchen:block/scarecrow
-        hardness: 1.0
-        resistance: 1.0
-        sounds:
-          break: grass
-          step: grass
-          place: grass
-          hit: grass
-        loot:
-          - craftkitchen:scarecrow
-
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/scarecrow
+        settings:
+          hardness: 1.0
+          resistance: 1.0
+          sounds:
+            break: minecraft:block.grass.break
+            step: minecraft:block.grass.step
+            place: minecraft:block.grass.place
+            hit: minecraft:block.grass.hit
+        loot: craftkitchen:scarecrow
+    custom_model_data: 2019
   trash_can:
     material: note_block
-    custom-model-data: 2020
-    name: "&8&l垃圾桶"
+    name: '&8&l垃圾桶'
     lore:
-      - "&7&o废弃之物，皆归于此"
+    - '&7&o废弃之物，皆归于此'
     behavior:
-      block-item:
-        model: craftkitchen:block/trash_can
-        hardness: 2.0
-        resistance: 4.0
-        sounds:
-          break: metal
-          step: metal
-          place: metal
-          hit: metal
-        loot:
-          - craftkitchen:trash_can
+      type: block_item
+      block:
+        state:
+          auto_state: note_block
+          model:
+            texture: craftkitchen:block/trash_can
+        settings:
+          hardness: 2.0
+          resistance: 4.0
+          sounds:
+            break: minecraft:block.metal.break
+            step: minecraft:block.metal.step
+            place: minecraft:block.metal.place
+            hit: minecraft:block.metal.hit
+        loot: craftkitchen:trash_can
+    custom_model_data: 2020

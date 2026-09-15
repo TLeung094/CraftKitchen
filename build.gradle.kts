@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.example"
-version = "26.6.4"
+version = "26.6.5"
 
 repositories {
     mavenCentral()
