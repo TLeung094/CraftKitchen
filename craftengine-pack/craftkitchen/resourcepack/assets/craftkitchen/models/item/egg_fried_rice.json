@@ -1,15 +1,18 @@
 {
-  "parent": "craftkitchen:block/utensil_rack",
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "craftkitchen:item/egg_fried_rice"
+  },
   "display": {
     "thirdperson": {
       "rotation": [0, 90, 0],
-      "translation": [0, 1, 0],
-      "scale": [0.7, 0.7, 0.7]
+      "translation": [0, 1, -2],
+      "scale": [0.6, 0.6, 0.6]
     },
     "firstperson": {
       "rotation": [0, -135, 0],
       "translation": [0, 2, 0],
-      "scale": [0.6, 0.6, 0.6]
+      "scale": [0.5, 0.5, 0.5]
     },
     "gui": {
       "rotation": [0, 0, 0],
