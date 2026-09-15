@@ -10,43 +10,46 @@ settings:
   perfect-window-seconds: 30
 
 foods:
-  smoked_steak:
-    name: 煙燻牛排
+  braised_beef:
+    name: 红烧牛肉
     material: COOKED_BEEF
     custom-model-data: 10201
     effects:
       - type: STRENGTH
         duration: 60
         amplifier: 0
-  herb_steak:
-    name: 香草牛排
+  knight_steak:
+    name: 香煎骑士牛排
     material: COOKED_BEEF
     custom-model-data: 10202
-    effects:
-      - type: REGENERATION
-        duration: 10
-        amplifier: 0
-  honey_spicy_steak:
-    name: 蜜汁辣牛排
-    material: COOKED_BEEF
-    custom-model-data: 10203
     effects:
       - type: STRENGTH
         duration: 60
         amplifier: 1
+      - type: RESISTANCE
+        duration: 30
+        amplifier: 0
+  egg_fried_rice:
+    name: 蛋炒饭
+    material: COOKED_BEEF
+    custom-model-data: 10203
+    effects:
       - type: SPEED
         duration: 30
         amplifier: 0
+      - type: SATURATION
+        duration: 5
+        amplifier: 0
 
 recipes:
-  smoked_steak:
-    name: 煙燻牛排
+  braised_beef:
+    name: 红烧牛肉
     steps: [cut, marinate, cook]
-    ingredients: [BEEF, PEPPER]
-  herb_steak:
-    name: 香草牛排
+    ingredients: [BEEF]
+  knight_steak:
+    name: 香煎骑士牛排
     steps: [cut, cook, season]
-    ingredients: [BEEF, SWEET_BERRIES]
+    ingredients: [BEEF]
 
 seasonings:
   chili:
@@ -65,9 +68,9 @@ seasonings:
         amplifier: 0
 
 hidden-recipes:
-  honey_spicy_steak:
-    name: 蜜汁辣牛排
-    base: smoked_steak
+  egg_fried_rice:
+    name: 蛋炒饭
+    base: braised_beef
     seasonings: [chili, honey]
 
 quality:
@@ -75,11 +78,11 @@ quality:
   speed-weight: 0.5        # 完成速度對高級機率的加權（0=純機率，1=純速度）
   level-weight: 0.15      # 廚師等級加權
   tiers:
-    failed:    { probability: 0.05, multiplier: 0.5 }   # 失敗：灰色，效果 0.5x
-    normal:    { probability: 0.40, multiplier: 1.0 }  # 普通：白色
-    fine:      { probability: 0.35, multiplier: 1.25 } # 精良：綠色
-    rare:      { probability: 0.15, multiplier: 1.5 }  # 稀有：青色
-    legendary: { probability: 0.05, multiplier: 2.0 }  # 傳說：金色，效果 2.0x
+    failed:    { probability: 0.05, multiplier: 0.5 }   # 失敗：凋零，灰色，效果 0.5x
+    normal:    { probability: 0.40, multiplier: 1.0 }  # 普通：常木，白色
+    fine:      { probability: 0.35, multiplier: 1.25 } # 精良：新芽，綠色
+    rare:      { probability: 0.15, multiplier: 1.5 }  # 稀有：古木，青色
+    legendary: { probability: 0.05, multiplier: 2.0 }  # 傳說：森羅，金色，效果 2.0x
 
 database:
   type: sqlite

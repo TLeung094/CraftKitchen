@@ -1,8 +1,5 @@
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "craftkitchen:block/stove_top"
-  },
+  "parent": "craftkitchen:block/stove",
   "display": {
     "thirdperson": {
       "rotation": [0, 90, 0],
@@ -15,9 +12,8 @@
       "scale": [0.6, 0.6, 0.6]
     },
     "gui": {
-      "rotation": [0, 0, 0],
-      "translation": [0, 0, 0],
-      "scale": [0.95, 0.95, 0.95]
+      "rotation": [30, 45, 0],
+      "scale": [0.85, 0.85, 0.85]
     }
   }
 }
