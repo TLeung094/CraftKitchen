@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "craftkitchen:block/stove"
+    "all": "craftkitchen:block/oil_pot"
   }
 }

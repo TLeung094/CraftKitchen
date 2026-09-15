@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "craftkitchen:item/herb_steak"
+    "layer0": "craftkitchen:item/braised_beef"
   },
   "display": {
     "thirdperson": {

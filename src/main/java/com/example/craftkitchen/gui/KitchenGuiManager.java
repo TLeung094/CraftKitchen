@@ -88,10 +88,10 @@ public final class KitchenGuiManager implements Listener {
         "season", "點芳"
     );
     private static final Map<String, String> STEP_BLOCK_DESC = Map.of(
-        "cut", "森林砧板（壓力板／切石機）",
-        "marinate", "森林醃製台（釀造台）",
-        "cook", "森羅爐灶（營火，需打火石點燃）",
-        "season", "森羅調味桌（工作台）"
+        "cut", "菜板（壓力板／切石機）",
+        "marinate", "搪瓷盆子（釀造台）",
+        "cook", "炉灶（營火，需打火石點燃）",
+        "season", "厨具架（工作台）"
     );
 
     // ============================================================

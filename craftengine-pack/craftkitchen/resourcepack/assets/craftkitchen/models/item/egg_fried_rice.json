@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "craftkitchen:item/honey_spicy_steak"
+    "layer0": "craftkitchen:item/egg_fried_rice"
   },
   "display": {
     "thirdperson": {

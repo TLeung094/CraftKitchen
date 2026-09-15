@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "craftkitchen:block/marinating_stand"
+    "all": "craftkitchen:block/soup_pot"
   }
 }

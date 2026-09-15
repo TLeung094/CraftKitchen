@@ -1,12 +1,6 @@
 {
-  "parent": "block/cube",
+  "parent": "block/cube_all",
   "textures": {
-    "up": "craftkitchen:block/cutting_board_top",
-    "down": "craftkitchen:block/cutting_board_top",
-    "north": "craftkitchen:block/cutting_board_side",
-    "south": "craftkitchen:block/cutting_board_side",
-    "east": "craftkitchen:block/cutting_board_side",
-    "west": "craftkitchen:block/cutting_board_side",
-    "particle": "craftkitchen:block/cutting_board_top"
+    "all": "craftkitchen:block/cutting_board"
   }
 }
