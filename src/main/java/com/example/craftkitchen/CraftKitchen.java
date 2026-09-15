@@ -5,7 +5,10 @@ import com.example.craftkitchen.config.ConfigManager;
 import com.example.craftkitchen.config.ModeDetector;
 import com.example.craftkitchen.cooking.CookingService;
 import com.example.craftkitchen.cooking.CookingTracker;
+import com.example.craftkitchen.cooking.QualityCalculator;
+import com.example.craftkitchen.cooking.QualityConfig;
 import com.example.craftkitchen.cooking.RecipeManager;
+import com.example.craftkitchen.cooking.StoveState;
 import com.example.craftkitchen.database.PlayerDataStore;
 import com.example.craftkitchen.food.FoodRegistry;
 import com.example.craftkitchen.holiday.HolidayManager;
@@ -28,6 +31,8 @@ public final class CraftKitchen extends JavaPlugin {
     private ItemProvider itemProvider;
     private FoodRegistry foodRegistry;
     private CookingService cookingService;
+    private QualityCalculator qualityCalculator;
+    private StoveState stoveState;
     private SharedMealManager sharedMealManager;
     private LevelManager levelManager;
     private HolidayManager holidayManager;
@@ -43,15 +48,20 @@ public final class CraftKitchen extends JavaPlugin {
         this.itemMode = ModeDetector.detect(this);
         this.foodRegistry = FoodRegistry.fromConfig(getConfig());
         this.itemProvider = ItemProviderFactory.create(this.itemMode, this);
+        this.qualityCalculator = new QualityCalculator(QualityConfig.fromConfig(getConfig()));
+        this.stoveState = new StoveState();
         this.cookingService = new CookingService(RecipeManager.fromConfig(this.itemMode, getConfig()), new CookingTracker());
         this.cookingService.setSessionTimeoutMillis(getConfig().getLong("settings.cooking-timeout-seconds", 300L) * 1000L);
         this.cookingService.setPerfectWindowMillis(getConfig().getLong("settings.perfect-window-seconds", 30L) * 1000L);
+        this.cookingService.setQualityCalculator(this.qualityCalculator);
+        this.cookingService.setRandomSource(Math::random);
         this.sharedMealManager = new SharedMealManager(
             getConfig().getDouble("settings.shared-radius", 5.0),
             getConfig().getDouble("settings.shared-multiplier", 1.5)
         );
         this.levelManager = new LevelManager();
         this.levelManager.setEnabled(getConfig().getBoolean("settings.level-enabled", true));
+        this.cookingService.setLevelManager(this.levelManager);
         this.holidayManager = new HolidayManager();
         this.holidayManager.setEnabled(getConfig().getBoolean("settings.holiday-enabled", true));
         this.seasoningManager = SeasoningManager.fromConfig(getConfig());
@@ -120,6 +130,14 @@ public final class CraftKitchen extends JavaPlugin {
         return cookingService;
     }
 
+    public QualityCalculator getQualityCalculator() {
+        return qualityCalculator;
+    }
+
+    public StoveState getStoveState() {
+        return stoveState;
+    }
+
     public SharedMealManager getSharedMealManager() {
         return sharedMealManager;
     }
@@ -139,9 +157,13 @@ public final class CraftKitchen extends JavaPlugin {
     public void reloadPluginConfig() {
         reloadConfig();
         this.foodRegistry = FoodRegistry.fromConfig(getConfig());
+        this.qualityCalculator = new QualityCalculator(QualityConfig.fromConfig(getConfig()));
         this.cookingService = new CookingService(RecipeManager.fromConfig(this.itemMode, getConfig()), new CookingTracker());
         this.cookingService.setSessionTimeoutMillis(getConfig().getLong("settings.cooking-timeout-seconds", 300L) * 1000L);
         this.cookingService.setPerfectWindowMillis(getConfig().getLong("settings.perfect-window-seconds", 30L) * 1000L);
+        this.cookingService.setQualityCalculator(this.qualityCalculator);
+        this.cookingService.setRandomSource(Math::random);
+        this.cookingService.setLevelManager(this.levelManager);
         this.levelManager.setEnabled(getConfig().getBoolean("settings.level-enabled", true));
         this.holidayManager.setEnabled(getConfig().getBoolean("settings.holiday-enabled", true));
     }

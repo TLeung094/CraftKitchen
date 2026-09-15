@@ -1,0 +1,8 @@
+# CraftKitchen content pack for CraftEngine
+# Deploy: copy this `craftkitchen` folder to plugins/CraftEngine/resources/
+# Then run: /ce reload all
+name: CraftKitchen
+namespace: craftkitchen
+author: TLeung094
+version: '1.0.0'
+description: Custom cooking foods and kitchen blocks for the CraftKitchen plugin.

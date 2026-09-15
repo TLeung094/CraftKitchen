@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "craftkitchen:block/cutting_board_top"
+  }
+}

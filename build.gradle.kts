@@ -9,10 +9,13 @@ version = "26.2.0-SNAPSHOT"
 repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://repo.momirealms.net/releases/")
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
+    compileOnly("net.momirealms:craft-engine-core:26.9")
+    compileOnly("net.momirealms:craft-engine-bukkit:26.9")
     implementation("org.xerial:sqlite-jdbc:3.45.3.0")
     testImplementation("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
     testImplementation(platform("org.junit:junit-bom:5.10.2"))
