@@ -11,6 +11,7 @@ import com.example.craftkitchen.cooking.RecipeManager;
 import com.example.craftkitchen.cooking.StoveState;
 import com.example.craftkitchen.database.PlayerDataStore;
 import com.example.craftkitchen.food.FoodRegistry;
+import com.example.craftkitchen.gui.KitchenGuiManager;
 import com.example.craftkitchen.holiday.HolidayManager;
 import com.example.craftkitchen.listener.BlockInteractListener;
 import com.example.craftkitchen.listener.ConsumeListener;
@@ -38,6 +39,7 @@ public final class CraftKitchen extends JavaPlugin {
     private HolidayManager holidayManager;
     private PlayerDataStore playerDataStore;
     private SeasoningManager seasoningManager;
+    private KitchenGuiManager guiManager;
 
     @Override
     public void onEnable() {
@@ -65,6 +67,7 @@ public final class CraftKitchen extends JavaPlugin {
         this.holidayManager = new HolidayManager();
         this.holidayManager.setEnabled(getConfig().getBoolean("settings.holiday-enabled", true));
         this.seasoningManager = SeasoningManager.fromConfig(getConfig());
+        this.guiManager = new KitchenGuiManager(this);
 
         try {
             getDataFolder().mkdirs();
@@ -83,6 +86,7 @@ public final class CraftKitchen extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ConsumeListener(this), this);
         getServer().getPluginManager().registerEvents(new BlockInteractListener(this, this.cookingService), this);
         getServer().getPluginManager().registerEvents(new HolidayJoinListener(this), this);
+        getServer().getPluginManager().registerEvents(this.guiManager, this);
 
         var kitchenCommand = new KitchenCommand(this);
         getCommand("kitchen").setExecutor(kitchenCommand);
@@ -152,6 +156,10 @@ public final class CraftKitchen extends JavaPlugin {
 
     public SeasoningManager getSeasoningManager() {
         return seasoningManager;
+    }
+
+    public KitchenGuiManager getGuiManager() {
+        return guiManager;
     }
 
     public void reloadPluginConfig() {

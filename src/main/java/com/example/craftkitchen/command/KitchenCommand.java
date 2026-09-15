@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KitchenCommand implements CommandExecutor, TabCompleter {
-    private static final List<String> SUB_COMMANDS = List.of("recipe", "level", "mode", "reload", "give");
+    private static final List<String> SUB_COMMANDS = List.of("recipe", "level", "mode", "reload", "give", "menu", "gui");
 
     private final CraftKitchen plugin;
 
@@ -29,7 +29,11 @@ public class KitchenCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage("CraftKitchen 指令：/kitchen <recipe|level|mode|reload|give>");
+            if (sender instanceof Player player) {
+                plugin.getGuiManager().openMain(player);
+                return true;
+            }
+            sender.sendMessage("CraftKitchen 指令：/kitchen <recipe|level|mode|reload|give|menu>");
             return true;
         }
 
@@ -39,6 +43,7 @@ public class KitchenCommand implements CommandExecutor, TabCompleter {
             case "mode" -> sender.sendMessage("目前物品模式：" + plugin.getItemMode().name());
             case "reload" -> handleReload(sender);
             case "give" -> handleGive(sender, args);
+            case "menu", "gui" -> handleMenu(sender);
             default -> sender.sendMessage("未知子指令：" + args[0]);
         }
         return true;
@@ -108,6 +113,18 @@ public class KitchenCommand implements CommandExecutor, TabCompleter {
         }
         player.getInventory().addItem(item);
         sender.sendMessage("已給予：" + args[1]);
+    }
+
+    private void handleMenu(CommandSender sender) {
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage("此指令僅限玩家使用。");
+            return;
+        }
+        if (!sender.hasPermission("craftkitchen.use")) {
+            sender.sendMessage("你沒有權限使用此指令。");
+            return;
+        }
+        plugin.getGuiManager().openMain(player);
     }
 
     @Override
