@@ -12,9 +12,9 @@
 
 ## 目前進度
 
-核心玩法迴圈已接通並全數測試通過：
+核心玩法迴圈已接通並全數測試通過（58 個單元測試）：
 
-**潛行右鍵方塊 → 食材檢查 → 多步驟進度（個人化、逾時重置）→ 品質判定 → 品質成品 → 食用效果加成**
+**潛行右鍵方塊 → 食材檢查 → 多步驟進度（個人化、逾時重置）→ 五級品質判定 → 品質成品 → 食用效果加成**
 
 | 系統 | 狀態 |
 |---|---|
@@ -27,13 +27,17 @@
 | 食材檢查與消耗 | ✅ |
 | 個人化進度（per-player） | ✅ |
 | 進度逾時重置 | ✅ |
-| 品質系統（PERFECT / NORMAL） | ✅ |
-| 品質影響食物效果（perfect-multiplier） | ✅ |
+| 五級品質（失敗/普通/精良/稀有/傳說，混合制：速度+等級加權） | ✅ |
+| 品質影響食物效果（每級倍率 0.5x ~ 2.0x） | ✅ |
+| 動態 Lore（品質分級 + 效果摘要） | ✅ |
+| 爐灶點燃／澆滅（cook 步驟需已點燃） | ✅ |
 | CraftEngine 實際物品生成 | ⬜ stub（fallback 為原版行為） |
 | 共食系統 | ✅ |
 | 料理等級 | ✅ |
 | 節日限定 | ✅ |
 | 調味與隱藏食譜 | ✅ |
+| docs/ 文件（INSTALL/MODES/CONFIG/RECIPES/BLOCKS/API） | ✅ |
+| resourcepack/ 骨架（pack.mcmeta + 模型 + 佔位貼圖） | ✅ |
 
 ---
 
@@ -54,11 +58,20 @@ settings:
   language: zh_TW
   shared-radius: 5           # 共食系統：效果延長的判定半徑（格）
   shared-multiplier: 1.5     # 共食系統：效果時間倍率
-  perfect-multiplier: 1.5    # PERFECT 品質成品的藥水時長倍率
   level-enabled: true        # 料理等級系統開關
   holiday-enabled: true      # 節日限定開關
   cooking-timeout-seconds: 300   # 烹飪進度逾時（秒），超時自動清空半成品進度
-  perfect-window-seconds: 30     # 完美窗口（秒）：從第一步起算，時限內完成 → PERFECT 品質
+  perfect-window-seconds: 30     # 完美窗口（秒）：此內完成 → 品質判定 speedScore=1.0
+
+quality:                      # 五級品質（混合制：速度+等級加權把機率往高級移動）
+  speed-weight: 0.5
+  level-weight: 0.15
+  tiers:
+    failed:    { probability: 0.05, multiplier: 0.5 }   # 灰
+    normal:    { probability: 0.40, multiplier: 1.0 }  # 白
+    fine:      { probability: 0.35, multiplier: 1.25 } # 綠
+    rare:      { probability: 0.15, multiplier: 1.5 }  # 青
+    legendary: { probability: 0.05, multiplier: 2.0 }   # 金
 
 foods:                        # 食物定義，ID 為 key，成品以此查 material / 顯示名 / 藥水效果
   smoked_steak:
@@ -101,16 +114,18 @@ database:
 |---|---|
 | `cut`（切） | 木製壓力板 / 切石機 |
 | `marinate`（醃） | 釀造台 |
-| `cook`（煮） | 營火 / 靈魂營火 |
+| `cook`（煮） | 營火 / 靈魂營火（**需先用打火石點燃**） |
 | `season`（調味） | 工作台 |
+
+**爐灶點燃／澆滅**：潛行右鍵營火 + 打火石 = 點燃；水桶 = 澆滅。cook 步驟需爐灶已點燃才能進行。
 
 1. 玩家背包備齊食譜所需食材（例如 `BEEF + PEPPER`）。
 2. 潛行右鍵對應方塊依序完成食譜步驟；插件會依玩家背包食材自動判定要推進哪道食譜。
-3. 所有步驟完成 → 消耗食材、獲得成品：
-   - 在完美窗口內完成 → **PERFECT** 品質，食用效果時長 ×1.5
-   - 超過完美窗口但在逾時內完成 → **NORMAL** 品質
+3. 所有步驟完成 → 消耗食材、依**混合制**判定五級品質、獲得帶 lore 的成品：
+   - 完成速度越快、廚師等級越高 → 高級（精良/稀有/傳說）機率越高
+   - 各級效果倍率：失敗 0.5x、普通 1.0x、精良 1.25x、稀有 1.5x、傳說 2.0x
    - 超過逾時時間 → 進度清空，需重頭開始
-4. 食用成品 → 套用食譜定義的藥水效果（PERFECT 品質時長加成）。
+4. 食用成品 → 套用食譜定義的藥水效果，時長依品質倍率縮放（與共食倍率疊加）。
 
 每位玩家的進度獨立追蹤；品質會寫入成品的 PersistentDataContainer，離線重上或交易後仍保留。
 
@@ -122,7 +137,7 @@ database:
 src/main/java/com/example/craftkitchen/
 ├── CraftKitchen.java          # 插件入口，初始化所有服務
 ├── config/                    # ConfigManager、ModeDetector（雙模式偵測）
-├── item/                      # ItemProvider 抽象層 + Vanilla/CraftEngine 實作
+├── item/                      # ItemProvider 抽象層 + Vanilla/CraftEngine 實作 + ItemLore
 ├── food/                      # FoodData、FoodEffect、FoodRegistry（config 載入）
 ├── cooking/                   # 核心烹飪域
 │   ├── RecipeDefinition.java  # 食譜定義（名稱/步驟/食材）
@@ -131,11 +146,14 @@ src/main/java/com/example/craftkitchen/
 │   ├── CookingTracker.java    # 進度追蹤（個人化、時鐘注入、逾時）
 │   ├── CookingService.java    # 步驟協調、食材驗證、品質評估
 │   ├── CookingResult.java     # 步驟結果列舉
-│   └── CookingQuality.java    # 品質列舉（NONE/NORMAL/PERFECT）
+│   ├── CookingQuality.java    # 五級品質列舉（NONE/FAILED/NORMAL/FINE/RARE/LEGENDARY）
+│   ├── QualityConfig.java     # 品質機率/倍率/加權（config 載入）
+│   ├── QualityCalculator.java # 混合制品質判定引擎（純邏輯）
+│   └── StoveState.java        # 爐灶點燃狀態追蹤
 └── listener/
-    ├── ConsumeListener.java       # 食用效果 + 品質時長加成
-    ├── BlockInteractListener.java # 方塊互動 → 步驟推進 → 成品發放
+    ├── ConsumeListener.java       # 食用效果 + 品質倍率
+    ├── BlockInteractListener.java # 方塊互動 → 步驟推進 → 爐灶點燃 → 成品發放
     └── QualityKeys.java           # PDC key 管理
 ```
 
-詳細設計與後續里程碑請見 [plan.md](plan.md)。
+詳細設計與後續里程碑請見 [plan.md](plan.md)；安裝與設定見 [docs/](docs/)。

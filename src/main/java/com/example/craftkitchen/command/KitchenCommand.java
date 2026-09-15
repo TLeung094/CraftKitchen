@@ -1,13 +1,18 @@
 package com.example.craftkitchen.command;
 
 import com.example.craftkitchen.CraftKitchen;
+import com.example.craftkitchen.cooking.CookingQuality;
 import com.example.craftkitchen.cooking.RecipeDefinition;
+import com.example.craftkitchen.food.FoodData;
+import com.example.craftkitchen.item.ItemLore;
+import com.example.craftkitchen.listener.QualityKeys;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +95,17 @@ public class KitchenCommand implements CommandExecutor, TabCompleter {
             return;
         }
         ItemStack item = plugin.getItemProvider().createItem(args[1], 1);
+        FoodData food = plugin.getFoodRegistry().get(args[1]);
+        var meta = item.getItemMeta();
+        if (meta != null) {
+            meta.getPersistentDataContainer().set(
+                QualityKeys.qualityKey(plugin),
+                PersistentDataType.STRING,
+                CookingQuality.NORMAL.name()
+            );
+            ItemLore.apply(meta, CookingQuality.NORMAL, food);
+            item.setItemMeta(meta);
+        }
         player.getInventory().addItem(item);
         sender.sendMessage("已給予：" + args[1]);
     }

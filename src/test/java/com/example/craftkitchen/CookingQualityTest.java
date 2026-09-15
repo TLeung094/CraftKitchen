@@ -11,40 +11,42 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class CookingQualityTest {
 
     @Test
-    void shouldGrantPerfectQualityWhenCompletedWithinLimit() {
+    void shouldRollFailedForLowestRoll() {
         AtomicLong now = new AtomicLong(0L);
         CookingService service = new CookingService(new RecipeManager(ItemMode.VANILLA), new CookingTracker(now::get));
         service.setPerfectWindowMillis(30_000L);
+        service.setSessionTimeoutMillis(300_000L);
+        service.setRandomSource(() -> 0.0);
         UUID alice = UUID.randomUUID();
 
         service.handleStep(alice, "smoked_steak", "cut");
-        now.addAndGet(10_000L);
+        now.addAndGet(5_000L);
         service.handleStep(alice, "smoked_steak", "marinate");
-        now.addAndGet(10_000L);
+        now.addAndGet(5_000L);
         service.handleStep(alice, "smoked_steak", "cook");
 
-        assertEquals(CookingQuality.PERFECT, service.getLastQuality(alice));
+        assertEquals(CookingQuality.FAILED, service.getLastQuality(alice));
     }
 
     @Test
-    void shouldGrantNormalQualityWhenCompletedSlowly() {
+    void shouldRollLegendaryForHighestRollWhenFast() {
         AtomicLong now = new AtomicLong(0L);
         CookingService service = new CookingService(new RecipeManager(ItemMode.VANILLA), new CookingTracker(now::get));
         service.setPerfectWindowMillis(30_000L);
-        service.setSessionTimeoutMillis(600_000L);
+        service.setSessionTimeoutMillis(300_000L);
+        service.setRandomSource(() -> 0.999999);
         UUID alice = UUID.randomUUID();
 
         service.handleStep(alice, "smoked_steak", "cut");
-        now.addAndGet(60_000L);
         service.handleStep(alice, "smoked_steak", "marinate");
-        now.addAndGet(60_000L);
         service.handleStep(alice, "smoked_steak", "cook");
 
-        assertEquals(CookingQuality.NORMAL, service.getLastQuality(alice));
+        assertEquals(CookingQuality.LEGENDARY, service.getLastQuality(alice));
     }
 
     @Test
@@ -54,5 +56,25 @@ class CookingQualityTest {
         UUID alice = UUID.randomUUID();
 
         assertEquals(CookingQuality.NONE, service.getLastQuality(alice));
+    }
+
+    @Test
+    void shouldNeverRollNoneOnCompletion() {
+        AtomicLong now = new AtomicLong(0L);
+        CookingService service = new CookingService(new RecipeManager(ItemMode.VANILLA), new CookingTracker(now::get));
+        service.setPerfectWindowMillis(30_000L);
+        service.setSessionTimeoutMillis(300_000L);
+        UUID alice = UUID.randomUUID();
+
+        for (double roll = 0.0; roll < 1.0; roll += 0.05) {
+            final double r = roll;
+            service.setRandomSource(() -> r);
+            service.handleStep(alice, "smoked_steak", "cut");
+            now.addAndGet(1_000L);
+            service.handleStep(alice, "smoked_steak", "marinate");
+            now.addAndGet(1_000L);
+            service.handleStep(alice, "smoked_steak", "cook");
+            assertNotEquals(CookingQuality.NONE, service.getLastQuality(alice));
+        }
     }
 }

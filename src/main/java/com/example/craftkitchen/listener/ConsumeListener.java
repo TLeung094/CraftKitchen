@@ -20,11 +20,8 @@ public class ConsumeListener implements Listener {
         this.plugin = plugin;
     }
 
-    public static int scaleDuration(int durationSeconds, CookingQuality quality, double perfectMultiplier) {
-        if (quality != CookingQuality.PERFECT) {
-            return durationSeconds;
-        }
-        return (int) Math.round(durationSeconds * perfectMultiplier);
+    public static int scaleDuration(int durationSeconds, double multiplier) {
+        return (int) Math.round(durationSeconds * multiplier);
     }
 
     @EventHandler
@@ -43,13 +40,13 @@ public class ConsumeListener implements Listener {
         }
 
         CookingQuality quality = readQuality(item);
-        double multiplier = plugin.getConfig().getDouble("settings.perfect-multiplier", 1.5);
+        double multiplier = plugin.getQualityCalculator().multiplier(quality);
         boolean sharing = plugin.getSharedMealManager().hasNearbyPlayers(player);
 
         for (FoodEffect effect : food.getEffects()) {
             PotionEffectType type = PotionEffectType.getByName(effect.getType());
             if (type != null) {
-                int scaled = scaleDuration(effect.getDuration(), quality, multiplier);
+                int scaled = scaleDuration(effect.getDuration(), multiplier);
                 scaled = plugin.getSharedMealManager().scaleDuration(scaled, sharing);
                 player.addPotionEffect(new PotionEffect(type, scaled * 20, effect.getAmplifier()));
             }

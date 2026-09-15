@@ -1,9 +1,12 @@
 package com.example.craftkitchen.cooking;
 
+import com.example.craftkitchen.level.LevelManager;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 public class CookingService {
     private final RecipeManager recipeManager;
@@ -11,6 +14,9 @@ public class CookingService {
     private final Map<UUID, CookingQuality> lastQuality = new HashMap<>();
     private long sessionTimeoutMillis;
     private long perfectWindowMillis;
+    private QualityCalculator qualityCalculator = new QualityCalculator();
+    private LevelManager levelManager;
+    private Supplier<Double> randomSource = Math::random;
 
     public CookingService(RecipeManager recipeManager, CookingTracker tracker) {
         this.recipeManager = recipeManager;
@@ -23,6 +29,22 @@ public class CookingService {
 
     public void setPerfectWindowMillis(long perfectWindowMillis) {
         this.perfectWindowMillis = perfectWindowMillis;
+    }
+
+    public void setQualityCalculator(QualityCalculator qualityCalculator) {
+        this.qualityCalculator = qualityCalculator != null ? qualityCalculator : new QualityCalculator();
+    }
+
+    public void setLevelManager(LevelManager levelManager) {
+        this.levelManager = levelManager;
+    }
+
+    public void setRandomSource(Supplier<Double> randomSource) {
+        this.randomSource = randomSource != null ? randomSource : Math::random;
+    }
+
+    public QualityCalculator getQualityCalculator() {
+        return qualityCalculator;
     }
 
     public CookingQuality getLastQuality(UUID playerId) {
@@ -74,10 +96,9 @@ public class CookingService {
     }
 
     private CookingQuality evaluateQuality(UUID playerId) {
-        if (perfectWindowMillis > 0 && tracker.getSessionElapsed(playerId) <= perfectWindowMillis) {
-            return CookingQuality.PERFECT;
-        }
-        return CookingQuality.NORMAL;
+        long elapsed = tracker.getSessionElapsed(playerId);
+        int level = levelManager == null ? 1 : levelManager.getLevel(playerId);
+        return qualityCalculator.roll(elapsed, perfectWindowMillis, sessionTimeoutMillis, level, randomSource.get());
     }
 
     public List<String> getMissingIngredients(String recipeId, List<String> availableMaterials) {

@@ -70,6 +70,17 @@ hidden-recipes:
     base: smoked_steak
     seasonings: [chili, honey]
 
+quality:
+  enabled: true
+  speed-weight: 0.5        # 完成速度對高級機率的加權（0=純機率，1=純速度）
+  level-weight: 0.15      # 廚師等級加權
+  tiers:
+    failed:    { probability: 0.05, multiplier: 0.5 }   # 失敗：灰色，效果 0.5x
+    normal:    { probability: 0.40, multiplier: 1.0 }  # 普通：白色
+    fine:      { probability: 0.35, multiplier: 1.25 } # 精良：綠色
+    rare:      { probability: 0.15, multiplier: 1.5 }  # 稀有：青色
+    legendary: { probability: 0.05, multiplier: 2.0 }  # 傳說：金色，效果 2.0x
+
 database:
   type: sqlite
   file: data.db
