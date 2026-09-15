@@ -12,7 +12,7 @@
 
 ## 目前進度
 
-核心玩法迴圈已接通並全數測試通過（58 個單元測試）：
+核心玩法迴圈已接通並全數測試通過（64 個單元測試）：
 
 **潛行右鍵方塊 → 食材檢查 → 多步驟進度（個人化、逾時重置）→ 五級品質判定 → 品質成品 → 食用效果加成**
 
@@ -36,7 +36,8 @@
 | 料理等級 | ✅ |
 | 節日限定 | ✅ |
 | 調味與隱藏食譜 | ✅ |
-| docs/ 文件（INSTALL/MODES/CONFIG/RECIPES/BLOCKS/API） | ✅ |
+| 廚房 GUI（食譜大全 / 等級 / 烹飪指南，`/kitchen menu`） | ✅ |
+| docs/ 文件（INSTALL/MODES/CONFIG/RECIPES/BLOCKS/API/GUI） | ✅ |
 | resourcepack/ 骨架（原版模式 pack.mcmeta + 模型 + 佔位貼圖） | ✅ |
 | craftengine-pack/（CE 模式 content pack：3 料理 + 4 廚房方塊 + 32×32 貼圖） | ✅ |
 

@@ -1,5 +1,5 @@
 name: CraftKitchen
-version: '26.2.0'
+version: '26.3.0'
 main: com.example.craftkitchen.CraftKitchen
 api-version: '1.20'
 softdepend:
@@ -9,6 +9,7 @@ commands:
   kitchen:
     description: CraftKitchen main command
     usage: /kitchen <subcommand>
+    aliases: [ck]
 permissions:
   craftkitchen.use:
     default: true
