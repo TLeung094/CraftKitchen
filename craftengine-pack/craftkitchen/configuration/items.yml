@@ -1,382 +1,525 @@
 # ========================================
-# CraftKitchen items.yml — 森罗物语：厨房
-# Fixed: behavior.type = block_item, loot = single string
-# Fixed: food items need texture field for custom model
+# CraftKitchen items.yml + blocks.yml — 森罗物语：厨房
+# Pattern: blocks defined under blocks:, items reference via behavior.block
+# Fix: separate blocks section (note_block textures fixed, texture paths correct)
 # ========================================
 
+# ----------------------------------------------------------------------------
+# 方塊定義（獨立 blocks section）
+# 每個方塊有完整 state/settings/loot，物品透過 behavior.block 引用
+# ----------------------------------------------------------------------------
+
+blocks:
+
+  # 菜板（木製，切食材用）
+  craftkitchen:cutting_board:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/cutting_board
+    settings:
+      hardness: 2.0
+      resistance: 6.0
+      sounds:
+        break: minecraft:block.wood.break
+        step: minecraft:block.wood.step
+        place: minecraft:block.wood.place
+        hit: minecraft:block.wood.hit
+        fall: minecraft:block.wood.fall
+    loot: craftkitchen:cutting_board
+
+  # 爐灶（煮食用，火屬性）
+  craftkitchen:stove:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/stove
+    settings:
+      hardness: 5.0
+      resistance: 10.0
+      luminance: 7
+      sounds:
+        break: minecraft:block.stone.break
+        step: minecraft:block.stone.step
+        place: minecraft:block.stone.place
+        hit: minecraft:block.stone.hit
+        fall: minecraft:block.stone.fall
+    loot: craftkitchen:stove
+
+  # 搪瓷盆子（洗菜/醃製用，金屬+玻璃）
+  craftkitchen:enamel_basin:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/enamel_basin
+    settings:
+      hardness: 1.5
+      resistance: 3.0
+      sounds:
+        break: minecraft:block.glass.break
+        step: minecraft:block.metal.step
+        place: minecraft:block.metal.place
+        hit: minecraft:block.metal.hit
+        fall: minecraft:block.metal.fall
+    loot: craftkitchen:enamel_basin
+
+  # 廚具架（裝飾性，竹製）
+  craftkitchen:utensil_rack:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/utensil_rack
+    settings:
+      hardness: 1.0
+      resistance: 2.0
+      sounds:
+        break: minecraft:block.bamboo_wood.break
+        step: minecraft:block.bamboo_wood.step
+        place: minecraft:block.bamboo_wood.place
+        hit: minecraft:block.bamboo_wood.hit
+        fall: minecraft:block.bamboo_wood.fall
+    loot: craftkitchen:utensil_rack
+
+  # 炒鍋（中式廚房必備，鐵製）
+  craftkitchen:wok:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/wok
+    settings:
+      hardness: 3.0
+      resistance: 6.0
+      sounds:
+        break: minecraft:block.metal.break
+        step: minecraft:block.metal.step
+        place: minecraft:block.metal.place
+        hit: minecraft:block.metal.hit
+        fall: minecraft:block.metal.fall
+    loot: craftkitchen:wok
+
+  # 湯鍋（燉湯用）
+  craftkitchen:soup_pot:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/soup_pot
+    settings:
+      hardness: 3.0
+      resistance: 6.0
+      sounds:
+        break: minecraft:block.metal.break
+        step: minecraft:block.metal.step
+        place: minecraft:block.metal.place
+        hit: minecraft:block.metal.hit
+        fall: minecraft:block.metal.fall
+    loot: craftkitchen:soup_pot
+
+  # 蒸籠（蒸食物，竹製）
+  craftkitchen:steamer:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/steamer
+    settings:
+      hardness: 1.5
+      resistance: 3.0
+      sounds:
+        break: minecraft:block.bamboo_wood.break
+        step: minecraft:block.bamboo_wood.step
+        place: minecraft:block.bamboo_wood.place
+        hit: minecraft:block.bamboo_wood.hit
+        fall: minecraft:block.bamboo_wood.fall
+    loot: craftkitchen:steamer
+
+  # 石磨（磨豆漿/研磨）
+  craftkitchen:stone_mill:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/stone_mill
+    settings:
+      hardness: 4.0
+      resistance: 8.0
+      sounds:
+        break: minecraft:block.stone.break
+        step: minecraft:block.stone.step
+        place: minecraft:block.stone.place
+        hit: minecraft:block.stone.hit
+        fall: minecraft:block.stone.fall
+    loot: craftkitchen:stone_mill
+
+  # 油壺（裝飾）
+  craftkitchen:oil_pot:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/oil_pot
+    settings:
+      hardness: 1.0
+      resistance: 2.0
+      sounds:
+        break: minecraft:block.glass.break
+        step: minecraft:block.metal.step
+        place: minecraft:block.metal.place
+        hit: minecraft:block.metal.hit
+        fall: minecraft:block.metal.fall
+    loot: craftkitchen:oil_pot
+
+  # 茶壺（裝飾）
+  craftkitchen:teapot:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/teapot
+    settings:
+      hardness: 1.5
+      resistance: 3.0
+      sounds:
+        break: minecraft:block.glass.break
+        step: minecraft:block.metal.step
+        place: minecraft:block.metal.place
+        hit: minecraft:block.metal.hit
+        fall: minecraft:block.metal.fall
+    loot: craftkitchen:teapot
+
+  # 水果籃（裝飾）
+  craftkitchen:fruit_basket:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/fruit_basket
+    settings:
+      hardness: 1.0
+      resistance: 2.0
+      sounds:
+        break: minecraft:block.bamboo_wood.break
+        step: minecraft:block.bamboo_wood.step
+        place: minecraft:block.bamboo_wood.place
+        hit: minecraft:block.bamboo_wood.hit
+        fall: minecraft:block.bamboo_wood.fall
+    loot: craftkitchen:fruit_basket
+
+  # 食譜書（裝飾+指引）
+  craftkitchen:recipe_book:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/recipe_book
+    settings:
+      hardness: 0.5
+      resistance: 1.0
+      sounds:
+        break: minecraft:block.wood.break
+        step: minecraft:block.wood.step
+        place: minecraft:block.wood.place
+        hit: minecraft:block.wood.hit
+        fall: minecraft:block.wood.fall
+    loot: craftkitchen:recipe_book
+
+  # 旋風烤爐
+  craftkitchen:cyclone_grill:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/cyclone_grill
+    settings:
+      hardness: 5.0
+      resistance: 10.0
+      luminance: 7
+      sounds:
+        break: minecraft:block.stone.break
+        step: minecraft:block.stone.step
+        place: minecraft:block.stone.place
+        hit: minecraft:block.stone.hit
+        fall: minecraft:block.stone.fall
+    loot: craftkitchen:cyclone_grill
+
+  # 稻草人（裝飾）
+  craftkitchen:scarecrow:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/scarecrow
+    settings:
+      hardness: 0.5
+      resistance: 1.0
+      sounds:
+        break: minecraft:block.wood.break
+        step: minecraft:block.wood.step
+        place: minecraft:block.wood.place
+        hit: minecraft:block.wood.hit
+        fall: minecraft:block.wood.fall
+    loot: craftkitchen:scarecrow
+
+  # 垃圾桶
+  craftkitchen:trash_can:
+    state:
+      auto_state: note_block
+      model:
+        texture: craftkitchen:block/trash_can
+    settings:
+      hardness: 2.0
+      resistance: 5.0
+      sounds:
+        break: minecraft:block.metal.break
+        step: minecraft:block.metal.step
+        place: minecraft:block.metal.place
+        hit: minecraft:block.metal.hit
+        fall: minecraft:block.metal.fall
+    loot: craftkitchen:trash_can
+
+
+# ----------------------------------------------------------------------------
+# 物品定義（items section）
+# 方塊物品引用對應方塊；食物物品直接用 texture
+# ----------------------------------------------------------------------------
+
 items:
-  braised_beef:
+
+  # ============= 方塊物品（block_item 引用 blocks section）=============
+
+  craftkitchen:cutting_board:
+    material: wooden_pressure_plate
+    data:
+      item_name: '<!i><#8B4513>菜板'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7切食材用的木質砧板'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:cutting_board
+
+  craftkitchen:stove:
+    material: blast_furnace
+    data:
+      item_name: '<!i><#FF6B35>爐灶'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7煮食用的火爐'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:stove
+
+  craftkitchen:enamel_basin:
+    material: cauldron
+    data:
+      item_name: '<!i><#FFFFFF>搪瓷盆子'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7洗菜/醃製用的盆子'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:enamel_basin
+
+  craftkitchen:utensil_rack:
+    material: bamboo_fence
+    data:
+      item_name: '<!i><#6B8E23>廚具架'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7放置廚具的架子'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:utensil_rack
+
+  craftkitchen:wok:
+    material: hopper
+    data:
+      item_name: '<!i><#2F2F2F>炒鍋'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7中式炒鍋，必備廚具'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:wok
+
+  craftkitchen:soup_pot:
+    material: cauldron
+    data:
+      item_name: '<!i><#8B7355>湯鍋'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7燉湯用的鍋子'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:soup_pot
+
+  craftkitchen:steamer:
+    material: bamboo_trapdoor
+    data:
+      item_name: '<!i><#DEB887>蒸籠'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7蒸食物用的竹製器具'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:steamer
+
+  craftkitchen:stone_mill:
+    material: grindstone
+    data:
+      item_name: '<!i><#A9A9A9>石磨'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7磨豆漿/研磨用的石磨'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:stone_mill
+
+  craftkitchen:oil_pot:
+    material: flower_pot
+    data:
+      item_name: '<!i><#FFD700>油壺'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7裝飾用的油壺'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:oil_pot
+
+  craftkitchen:teapot:
+    material: flower_pot
+    data:
+      item_name: '<!i><#CD853F>茶壺'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7裝飾用的茶壺'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:teapot
+
+  craftkitchen:fruit_basket:
+    material: oak_fence
+    data:
+      item_name: '<!i><#FF8C00>水果籃'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7裝飾用的水果籃'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:fruit_basket
+
+  craftkitchen:recipe_book:
+    material: writable_book
+    data:
+      item_name: '<!i><#4B0082>森羅食譜書'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7記載所有食譜的書'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:recipe_book
+
+  craftkitchen:cyclone_grill:
+    material: smoker
+    data:
+      item_name: '<!i><#FF4500>旋風烤爐'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7旋風式高效烤爐'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:cyclone_grill
+
+  craftkitchen:scarecrow:
+    material: armor_stand
+    data:
+      item_name: '<!i><#DAA520>稻草人'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7裝飾用的稻草人'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:scarecrow
+
+  craftkitchen:trash_can:
+    material: hopper
+    data:
+      item_name: '<!i><#696969>垃圾桶'
+      lore:
+        - '&7森羅物語·廚房'
+        - '&7金屬垃圾桶'
+        - ''
+        - '&a放置於世界'
+    behavior:
+      type: block_item
+      block: craftkitchen:trash_can
+
+  # ============= 食物物品（直接 texture）=============
+
+  craftkitchen:braised_beef:
     material: cooked_beef
-    name: '&c&l红烧牛肉'
-    lore:
-    - '&7&o浓油赤酱，色泽红亮'
-    - '&7&o慢火细炖，肉质酥烂'
-    - ''
-    - '&e品质：&f{quality}'
+    data:
+      item_name: '<!i><#FF4500>紅燒牛肉'
+      lore:
+        - '&7&o濃油赤醬，色澤紅亮'
+        - '&7&o慢火細燉，肉質酥爛'
+        - ''
+        - '&e品質：&f{quality}'
+        - '&6✦ 森羅之味'
     food-properties:
       nutrition: 12
       saturation: 18
     texture: craftkitchen:item/braised_beef
     custom_model_data: 1001
-  knight_steak:
+
+  craftkitchen:knight_steak:
     material: cooked_beef
-    name: '&6&l香煎骑士牛排'
-    lore:
-    - '&7&o铁板高温锁住肉汁'
-    - '&7&o外焦里嫩，骑士的最爱'
-    - ''
-    - '&e品质：&f{quality}'
-    - '&c稀有配方 ★'
+    data:
+      item_name: '<!i><#FFD700>香煎騎士牛排'
+      lore:
+        - '&7&o鐵板高溫鎖住肉汁'
+        - '&7&o外焦裡嫩，騎士的最愛'
+        - ''
+        - '&e品質：&f{quality}'
+        - '&c稀有配方 ★'
+        - '&6✦ 森羅之味'
     food-properties:
       nutrition: 14
       saturation: 20
     texture: craftkitchen:item/knight_steak
     custom_model_data: 1002
-  egg_fried_rice:
+
+  craftkitchen:egg_fried_rice:
     material: cooked_beef
-    name: '&e&l蛋炒饭'
-    lore:
-    - '&7&o金黄蛋碎裹粒粒分明'
-    - '&7&o葱香四溢，家常之味'
-    - ''
-    - '&e品质：&f{quality}'
+    data:
+      item_name: '<!i><#FFFF00>蛋炒飯'
+      lore:
+        - '&7&o金黃蛋碎裹粒粒分明'
+        - '&7&o蔥香四溢，家常之味'
+        - ''
+        - '&e品質：&f{quality}'
+        - '&6✦ 森羅之味'
     food-properties:
       nutrition: 8
       saturation: 12
     texture: craftkitchen:item/egg_fried_rice
     custom_model_data: 1003
-  cutting_board:
-    material: note_block
-    name: '&e&l菜板'
-    lore:
-    - '&7木纹年轮，切配食材之处'
-    - '&7&o用于：&f伐枝（切）'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/cutting_board
-        settings:
-          hardness: 2.0
-          resistance: 6.0
-          sounds:
-            break: minecraft:block.wood.break
-            step: minecraft:block.wood.step
-            place: minecraft:block.wood.place
-            hit: minecraft:block.wood.hit
-        loot: craftkitchen:cutting_board
-    custom_model_data: 2001
-  stove:
-    material: note_block
-    name: '&c&l炉灶'
-    lore:
-    - '&7石砌古朴，火盘炙热'
-    - '&7&o用于：&f烧柴（煮）'
-    - '&7&o状态：&f{firing}'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/stove
-        settings:
-          hardness: 5.0
-          resistance: 10.0
-          sounds:
-            break: minecraft:block.stone.break
-            step: minecraft:block.stone.step
-            place: minecraft:block.stone.place
-            hit: minecraft:block.stone.hit
-        loot: craftkitchen:stove
-    custom_model_data: 2002
-  enamel_basin:
-    material: note_block
-    name: '&f&l搪瓷盆子'
-    lore:
-    - '&7白釉搪瓷，浸露调浆'
-    - '&7&o用于：&f浸露（醃）'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/enamel_basin
-        settings:
-          hardness: 1.0
-          resistance: 3.0
-          sounds:
-            break: minecraft:block.glass.break
-            step: minecraft:block.metal.step
-            place: minecraft:block.metal.place
-            hit: minecraft:block.metal.hit
-        loot: craftkitchen:enamel_basin
-    custom_model_data: 2003
-  utensil_rack:
-    material: note_block
-    name: '&6&l厨具架'
-    lore:
-    - '&7置锅碗瓢盆，调味之所'
-    - '&7&o用于：&f点芳（调）'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/utensil_rack
-        settings:
-          hardness: 2.0
-          resistance: 6.0
-          sounds:
-            break: minecraft:block.wood.break
-            step: minecraft:block.wood.step
-            place: minecraft:block.wood.place
-            hit: minecraft:block.wood.hit
-        loot: craftkitchen:utensil_rack
-    custom_model_data: 2004
-  wok:
-    material: note_block
-    name: '&c&l炒锅'
-    lore:
-    - '&7&o猛火爆炒，香气四溢'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/wok
-        settings:
-          hardness: 3.0
-          resistance: 6.0
-          sounds:
-            break: minecraft:block.metal.break
-            step: minecraft:block.metal.step
-            place: minecraft:block.metal.place
-            hit: minecraft:block.metal.hit
-        loot: craftkitchen:wok
-    custom_model_data: 2010
-  soup_pot:
-    material: note_block
-    name: '&6&l汤锅'
-    lore:
-    - '&7&o慢火细炖，浓汤之源'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/soup_pot
-        settings:
-          hardness: 3.0
-          resistance: 6.0
-          sounds:
-            break: minecraft:block.metal.break
-            step: minecraft:block.metal.step
-            place: minecraft:block.metal.place
-            hit: minecraft:block.metal.hit
-        loot: craftkitchen:soup_pot
-    custom_model_data: 2011
-  steamer:
-    material: note_block
-    name: '&e&l蒸笼'
-    lore:
-    - '&7&o竹蒸笼，蒸汽升腾'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/steamer
-        settings:
-          hardness: 2.0
-          resistance: 4.0
-          sounds:
-            break: minecraft:block.bamboo_wood.break
-            step: minecraft:block.bamboo_wood.step
-            place: minecraft:block.bamboo_wood.place
-            hit: minecraft:block.bamboo_wood.hit
-        loot: craftkitchen:steamer
-    custom_model_data: 2012
-  stone_mill:
-    material: note_block
-    name: '&7&l石磨'
-    lore:
-    - '&7&o石磨成粉，研磨香料'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/stone_mill
-        settings:
-          hardness: 6.0
-          resistance: 12.0
-          sounds:
-            break: minecraft:block.stone.break
-            step: minecraft:block.stone.step
-            place: minecraft:block.stone.place
-            hit: minecraft:block.stone.hit
-        loot: craftkitchen:stone_mill
-    custom_model_data: 2013
-  oil_pot:
-    material: note_block
-    name: '&e&l油壶'
-    lore:
-    - '&7&o油光鉴人，调味之需'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/oil_pot
-        settings:
-          hardness: 1.0
-          resistance: 3.0
-          sounds:
-            break: minecraft:block.glass.break
-            step: minecraft:block.metal.step
-            place: minecraft:block.metal.place
-            hit: minecraft:block.metal.hit
-        loot: craftkitchen:oil_pot
-    custom_model_data: 2014
-  teapot:
-    material: note_block
-    name: '&a&l茶壶'
-    lore:
-    - '&7&o煮茶论道，悠然自在'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/teapot
-        settings:
-          hardness: 2.0
-          resistance: 4.0
-          sounds:
-            break: minecraft:block.metal.break
-            step: minecraft:block.metal.step
-            place: minecraft:block.metal.place
-            hit: minecraft:block.metal.hit
-        loot: craftkitchen:teapot
-    custom_model_data: 2015
-  fruit_basket:
-    material: note_block
-    name: '&6&l果篮'
-    lore:
-    - '&7&o满载山林鲜果'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/fruit_basket
-        settings:
-          hardness: 1.0
-          resistance: 2.0
-          sounds:
-            break: minecraft:block.bamboo_wood.break
-            step: minecraft:block.bamboo_wood.step
-            place: minecraft:block.bamboo_wood.place
-            hit: minecraft:block.bamboo_wood.hit
-        loot: craftkitchen:fruit_basket
-    custom_model_data: 2016
-  recipe_book:
-    material: note_block
-    name: '&e&l菜谱'
-    lore:
-    - '&7&o古朴菜谱，记录森罗之味'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/recipe_book
-        settings:
-          hardness: 1.0
-          resistance: 2.0
-          sounds:
-            break: minecraft:block.grass.break
-            step: minecraft:block.grass.step
-            place: minecraft:block.grass.place
-            hit: minecraft:block.grass.hit
-        loot: craftkitchen:recipe_book
-    custom_model_data: 2017
-  cyclone_grill:
-    material: note_block
-    name: '&c&l旋风烤肉塔'
-    lore:
-    - '&7&o立体旋转烤架，炙烤每一面'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/cyclone_grill
-        settings:
-          hardness: 4.0
-          resistance: 8.0
-          sounds:
-            break: minecraft:block.metal.break
-            step: minecraft:block.metal.step
-            place: minecraft:block.metal.place
-            hit: minecraft:block.metal.hit
-        loot: craftkitchen:cyclone_grill
-    custom_model_data: 2018
-  scarecrow:
-    material: note_block
-    name: '&e&l稻草人'
-    lore:
-    - '&7&o田园守望，稻草编织'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/scarecrow
-        settings:
-          hardness: 1.0
-          resistance: 1.0
-          sounds:
-            break: minecraft:block.grass.break
-            step: minecraft:block.grass.step
-            place: minecraft:block.grass.place
-            hit: minecraft:block.grass.hit
-        loot: craftkitchen:scarecrow
-    custom_model_data: 2019
-  trash_can:
-    material: note_block
-    name: '&8&l垃圾桶'
-    lore:
-    - '&7&o废弃之物，皆归于此'
-    behavior:
-      type: block_item
-      block:
-        state:
-          auto_state: note_block
-          model:
-            texture: craftkitchen:block/trash_can
-        settings:
-          hardness: 2.0
-          resistance: 4.0
-          sounds:
-            break: minecraft:block.metal.break
-            step: minecraft:block.metal.step
-            place: minecraft:block.metal.place
-            hit: minecraft:block.metal.hit
-        loot: craftkitchen:trash_can
-    custom_model_data: 2020
