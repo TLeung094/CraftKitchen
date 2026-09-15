@@ -11,11 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 料理成品動態 Lore 產生器。
+ * 料理成品動態 Lore 產生器（森羅物語版）。
  *
- * <p>將品質分級（含顏色）與效果摘要寫入物品 lore，讓玩家在滑鼠懸停時可見。
+ * <p>將森羅品質分級（含顏色）與效果摘要寫入物品 lore，讓玩家在滑鼠懸停時可見。
  * 與 {@link ItemProvider#createItem} 解耦：由知道品質的呼叫端（listener／指令）
  * 在取得 {@link ItemMeta} 後呼叫 {@link #apply} 套用。
+ *
+ * <p>品質行格式：「✦ 森羅之味：{品質名}」，呈現森林物語調性。
  */
 public final class ItemLore {
     private ItemLore() {
@@ -34,12 +36,16 @@ public final class ItemLore {
         }
         List<Component> lore = new ArrayList<>();
         if (quality != null && quality != CookingQuality.NONE) {
-            lore.add(Component.text("品質：" + quality.displayName(), quality.color())
-                .decoration(TextDecoration.ITALIC, false));
+            lore.add(
+                    Component.text("✦ 森羅之味：" + quality.displayName(), quality.color())
+                        .decoration(TextDecoration.ITALIC, false)
+                );
         }
         if (food != null && food.getEffects() != null && !food.getEffects().isEmpty()) {
-            lore.add(Component.text(summarizeEffects(food))
-                .decoration(TextDecoration.ITALIC, false));
+            lore.add(
+                    Component.text(summarizeEffects(food))
+                        .decoration(TextDecoration.ITALIC, false)
+                );
         }
         if (!lore.isEmpty()) {
             meta.lore(lore);
@@ -47,7 +53,7 @@ public final class ItemLore {
     }
 
     private static String summarizeEffects(FoodData food) {
-        StringBuilder sb = new StringBuilder("效果：");
+        StringBuilder sb = new StringBuilder("✦ 效果：");
         for (int i = 0; i < food.getEffects().size(); i++) {
             FoodEffect effect = food.getEffects().get(i);
             if (i > 0) {
