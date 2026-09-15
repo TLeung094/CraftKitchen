@@ -1,12 +1,12 @@
 # ========================================
 # CraftKitchen items.yml — 森罗物语：厨房
 # Fixed: behavior.type = block_item, loot = single string
+# Fixed: food items need texture field for custom model
 # ========================================
 
 items:
   braised_beef:
     material: cooked_beef
-    custom-model-data: 1001
     name: '&c&l红烧牛肉'
     lore:
     - '&7&o浓油赤酱，色泽红亮'
@@ -16,9 +16,10 @@ items:
     food-properties:
       nutrition: 12
       saturation: 18
+    texture: craftkitchen:item/braised_beef
+    custom_model_data: 1001
   knight_steak:
     material: cooked_beef
-    custom-model-data: 1002
     name: '&6&l香煎骑士牛排'
     lore:
     - '&7&o铁板高温锁住肉汁'
@@ -29,9 +30,10 @@ items:
     food-properties:
       nutrition: 14
       saturation: 20
+    texture: craftkitchen:item/knight_steak
+    custom_model_data: 1002
   egg_fried_rice:
     material: cooked_beef
-    custom-model-data: 1003
     name: '&e&l蛋炒饭'
     lore:
     - '&7&o金黄蛋碎裹粒粒分明'
@@ -41,9 +43,10 @@ items:
     food-properties:
       nutrition: 8
       saturation: 12
+    texture: craftkitchen:item/egg_fried_rice
+    custom_model_data: 1003
   cutting_board:
     material: note_block
-    custom-model-data: 2001
     name: '&e&l菜板'
     lore:
     - '&7木纹年轮，切配食材之处'
@@ -64,9 +67,9 @@ items:
             place: minecraft:block.wood.place
             hit: minecraft:block.wood.hit
         loot: craftkitchen:cutting_board
+    custom_model_data: 2001
   stove:
     material: note_block
-    custom-model-data: 2002
     name: '&c&l炉灶'
     lore:
     - '&7石砌古朴，火盘炙热'
@@ -88,9 +91,9 @@ items:
             place: minecraft:block.stone.place
             hit: minecraft:block.stone.hit
         loot: craftkitchen:stove
+    custom_model_data: 2002
   enamel_basin:
     material: note_block
-    custom-model-data: 2003
     name: '&f&l搪瓷盆子'
     lore:
     - '&7白釉搪瓷，浸露调浆'
@@ -111,9 +114,9 @@ items:
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
         loot: craftkitchen:enamel_basin
+    custom_model_data: 2003
   utensil_rack:
     material: note_block
-    custom-model-data: 2004
     name: '&6&l厨具架'
     lore:
     - '&7置锅碗瓢盆，调味之所'
@@ -134,9 +137,9 @@ items:
             place: minecraft:block.wood.place
             hit: minecraft:block.wood.hit
         loot: craftkitchen:utensil_rack
+    custom_model_data: 2004
   wok:
     material: note_block
-    custom-model-data: 2010
     name: '&c&l炒锅'
     lore:
     - '&7&o猛火爆炒，香气四溢'
@@ -156,9 +159,9 @@ items:
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
         loot: craftkitchen:wok
+    custom_model_data: 2010
   soup_pot:
     material: note_block
-    custom-model-data: 2011
     name: '&6&l汤锅'
     lore:
     - '&7&o慢火细炖，浓汤之源'
@@ -178,9 +181,9 @@ items:
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
         loot: craftkitchen:soup_pot
+    custom_model_data: 2011
   steamer:
     material: note_block
-    custom-model-data: 2012
     name: '&e&l蒸笼'
     lore:
     - '&7&o竹蒸笼，蒸汽升腾'
@@ -200,9 +203,9 @@ items:
             place: minecraft:block.bamboo_wood.place
             hit: minecraft:block.bamboo_wood.hit
         loot: craftkitchen:steamer
+    custom_model_data: 2012
   stone_mill:
     material: note_block
-    custom-model-data: 2013
     name: '&7&l石磨'
     lore:
     - '&7&o石磨成粉，研磨香料'
@@ -222,9 +225,9 @@ items:
             place: minecraft:block.stone.place
             hit: minecraft:block.stone.hit
         loot: craftkitchen:stone_mill
+    custom_model_data: 2013
   oil_pot:
     material: note_block
-    custom-model-data: 2014
     name: '&e&l油壶'
     lore:
     - '&7&o油光鉴人，调味之需'
@@ -244,9 +247,9 @@ items:
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
         loot: craftkitchen:oil_pot
+    custom_model_data: 2014
   teapot:
     material: note_block
-    custom-model-data: 2015
     name: '&a&l茶壶'
     lore:
     - '&7&o煮茶论道，悠然自在'
@@ -266,9 +269,9 @@ items:
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
         loot: craftkitchen:teapot
+    custom_model_data: 2015
   fruit_basket:
     material: note_block
-    custom-model-data: 2016
     name: '&6&l果篮'
     lore:
     - '&7&o满载山林鲜果'
@@ -288,9 +291,9 @@ items:
             place: minecraft:block.bamboo_wood.place
             hit: minecraft:block.bamboo_wood.hit
         loot: craftkitchen:fruit_basket
+    custom_model_data: 2016
   recipe_book:
     material: note_block
-    custom-model-data: 2017
     name: '&e&l菜谱'
     lore:
     - '&7&o古朴菜谱，记录森罗之味'
@@ -310,9 +313,9 @@ items:
             place: minecraft:block.grass.place
             hit: minecraft:block.grass.hit
         loot: craftkitchen:recipe_book
+    custom_model_data: 2017
   cyclone_grill:
     material: note_block
-    custom-model-data: 2018
     name: '&c&l旋风烤肉塔'
     lore:
     - '&7&o立体旋转烤架，炙烤每一面'
@@ -332,9 +335,9 @@ items:
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
         loot: craftkitchen:cyclone_grill
+    custom_model_data: 2018
   scarecrow:
     material: note_block
-    custom-model-data: 2019
     name: '&e&l稻草人'
     lore:
     - '&7&o田园守望，稻草编织'
@@ -354,9 +357,9 @@ items:
             place: minecraft:block.grass.place
             hit: minecraft:block.grass.hit
         loot: craftkitchen:scarecrow
+    custom_model_data: 2019
   trash_can:
     material: note_block
-    custom-model-data: 2020
     name: '&8&l垃圾桶'
     lore:
     - '&7&o废弃之物，皆归于此'
@@ -376,3 +379,4 @@ items:
             place: minecraft:block.metal.place
             hit: minecraft:block.metal.hit
         loot: craftkitchen:trash_can
+    custom_model_data: 2020
