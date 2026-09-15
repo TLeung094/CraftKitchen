@@ -91,6 +91,55 @@ public class CookingService {
             .toList();
     }
 
+    /**
+     * 回傳玩家在指定食譜中「下一個未完成步驟」，若全數完成或食譜不存在回 null。
+     */
+    public String nextStep(UUID playerId, String recipeId) {
+        RecipeDefinition recipe = recipeManager.getRecipe(recipeId);
+        if (recipe == null) {
+            return null;
+        }
+        List<String> done = tracker.getCompletedSteps(playerId, recipeId);
+        for (String step : recipe.getSteps()) {
+            if (!done.contains(step)) {
+                return step;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 決定玩家對「某步驟方塊」操作時應推進哪道食譜。
+     *
+     * <p>策略：優先推進玩家已進行中且下一步吻合的食譜；若無，則嘗試啟動「第一步吻合且食材齊全」的新食譜。
+     * 此方法為純邏輯（不碰 Bukkit），可單元測試。
+     */
+    public StepResolution resolveStep(UUID playerId, String stepId, List<String> availableMaterials) {
+        for (String recipeId : tracker.getActiveRecipes(playerId)) {
+            String next = nextStep(playerId, recipeId);
+            if (next != null && next.equals(stepId)) {
+                return new StepResolution(recipeId, handleStep(playerId, recipeId, stepId));
+            }
+        }
+        for (RecipeDefinition recipe : recipeManager.getRecipes()) {
+            if (recipe.getSteps().isEmpty()) {
+                continue;
+            }
+            if (!recipe.getSteps().get(0).equals(stepId)) {
+                continue;
+            }
+            if (!getMissingIngredients(recipe.getId(), availableMaterials).isEmpty()) {
+                continue;
+            }
+            return new StepResolution(recipe.getId(), handleStep(playerId, recipe.getId(), stepId));
+        }
+        return new StepResolution(null, CookingResult.NO_APPLICABLE_RECIPE);
+    }
+
+    /** resolveStep 的結果：recipeId 為 null 表示無可推進食譜。 */
+    public record StepResolution(String recipeId, CookingResult result) {
+    }
+
     public RecipeManager getRecipeManager() {
         return recipeManager;
     }

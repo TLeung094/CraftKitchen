@@ -36,6 +36,32 @@ public class CookingTracker {
         return new ArrayList<>(completedSteps.getOrDefault(recipeId, new HashSet<>()));
     }
 
+    /**
+     * 回傳該玩家在指定食譜中已完成的步驟。
+     */
+    public List<String> getCompletedSteps(UUID playerId, String recipeId) {
+        Set<String> done = playerSteps.getOrDefault(playerId, Map.of())
+            .getOrDefault(recipeId, Set.of());
+        return new ArrayList<>(done);
+    }
+
+    /**
+     * 回傳該玩家目前有進度（已完成至少一步）的食譜 id 清單，用於決定下一步推進對象。
+     */
+    public List<String> getActiveRecipes(UUID playerId) {
+        Map<String, Set<String>> recipes = playerSteps.get(playerId);
+        if (recipes == null) {
+            return List.of();
+        }
+        List<String> active = new ArrayList<>();
+        for (var entry : recipes.entrySet()) {
+            if (!entry.getValue().isEmpty()) {
+                active.add(entry.getKey());
+            }
+        }
+        return active;
+    }
+
     public boolean isCompleted(String recipeId) {
         return completedSteps.containsKey(recipeId) && !completedSteps.get(recipeId).isEmpty();
     }

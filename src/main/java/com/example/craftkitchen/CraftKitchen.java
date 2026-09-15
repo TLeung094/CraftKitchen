@@ -41,8 +41,8 @@ public final class CraftKitchen extends JavaPlugin {
 
         this.configManager = new ConfigManager(this);
         this.itemMode = ModeDetector.detect(this);
-        this.itemProvider = ItemProviderFactory.create(this.itemMode);
         this.foodRegistry = FoodRegistry.fromConfig(getConfig());
+        this.itemProvider = ItemProviderFactory.create(this.itemMode, this);
         this.cookingService = new CookingService(RecipeManager.fromConfig(this.itemMode, getConfig()), new CookingTracker());
         this.cookingService.setSessionTimeoutMillis(getConfig().getLong("settings.cooking-timeout-seconds", 300L) * 1000L);
         this.cookingService.setPerfectWindowMillis(getConfig().getLong("settings.perfect-window-seconds", 30L) * 1000L);

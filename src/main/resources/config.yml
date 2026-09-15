@@ -9,6 +9,35 @@ settings:
   cooking-timeout-seconds: 300
   perfect-window-seconds: 30
 
+foods:
+  smoked_steak:
+    name: 煙燻牛排
+    material: COOKED_BEEF
+    custom-model-data: 10201
+    effects:
+      - type: STRENGTH
+        duration: 60
+        amplifier: 0
+  herb_steak:
+    name: 香草牛排
+    material: COOKED_BEEF
+    custom-model-data: 10202
+    effects:
+      - type: REGENERATION
+        duration: 10
+        amplifier: 0
+  honey_spicy_steak:
+    name: 蜜汁辣牛排
+    material: COOKED_BEEF
+    custom-model-data: 10203
+    effects:
+      - type: STRENGTH
+        duration: 60
+        amplifier: 1
+      - type: SPEED
+        duration: 30
+        amplifier: 0
+
 recipes:
   smoked_steak:
     name: 煙燻牛排
